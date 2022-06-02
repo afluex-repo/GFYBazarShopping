@@ -1,0 +1,90 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../OrderSlip/css/bootstrap.min.css">
+    <style>
+        ul.location {
+            list-style: none;
+        }
+
+        .footer {
+            margin: 0 auto;
+            width: 40%;
+            padding-top: 50px;
+        }
+
+        ul.location li {
+            font-size: 20px;
+        }
+
+        .footer {
+            margin: 0 auto;
+            width: 42%;
+            padding-top: 50px;
+        }
+    </style>
+
+    <title>Order Slip</title>
+</head>
+<body>
+    <div class="logo text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <img src="http://demo4.afluex.com/Websitecss/img/logo.png" style="width:220px; height:60px">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="formd">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"><b>Name</b></label>
+                        <label>@ViewBag.CustomerName</label> 
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1"><b>Contact No</b></label>
+                        <label>@ViewBag.CustomerContact</label> 
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1"><b>Address</b></label>
+                        <label>@ViewBag.CustomerName</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="location">
+                        <li>Address : Shop no : THSH2/5H-10CP 4/1 Square One Plaza RatanKhand Lucknow UP</li>
+                        <li>E-mail : dwpeforyou@gmail.com</li>
+                        
+                        <li>Web : http://demo4.afluex.com/ </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="../../OrderSlip/js/bootstrap.min.js"></script>
+</body>
+</html>

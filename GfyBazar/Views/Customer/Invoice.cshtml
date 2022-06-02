@@ -1,0 +1,419 @@
+﻿@model GfyBazar.Models.Customer
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Invoice</title>
+
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+        }
+
+        table, th, td {
+            font-size: medium;
+            /*border: 1px solid black;*/
+            border-collapse: collapse;
+        }
+
+        th, td {
+            font-size: medium;
+            padding: 5px;
+        }
+
+        .second-section p {
+            line-height: 20px !important;
+            font-size: 14px;
+        }
+    </style>
+
+</head>
+
+
+
+<body>
+    @if (Model != null)
+    {
+        if (Model.lstOrders != null)
+        {
+            foreach (var item in Model.lstOrders)
+            {
+                <div class="reciptmain-page">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="first-section">
+                                    <h3>Tax Invoice</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="first-section">
+                                    <p>Order Id : <strong>@ViewBag.InvoiceNo</strong> <br>Order Date :@ViewBag.OrderDate</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="first-section">
+                                    <p>Invoice No : <strong>@item.InvoiceNo</strong><br>Invoice Date:@DateTime.Now.ToString("dd/MM/yyyy")</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="first-section">
+                                    <p>GSTIN: @item.GSTNo<br>PAN: @item.PAN</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="second-section">
+                                    <h5>Sold By</h5>
+                                    <p style="line-height: 18px;">@item.VendorName,</p>
+
+                                    <P style="line-height: 18px;">@item.Address,</P>
+                                    @*<p>Lalbagh Road, Banglore,</p>
+                                        <p>BANGLORE-50027</p>*@
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="second-section">
+                                    <h5>Shipping Address </h5>
+                                    <P>@ViewBag.CustomerName, Mob : (@ViewBag.CustomerMobile)</P>
+                                    <p>@ViewBag.CustomerAddress,</p>
+
+                                    <p>@ViewBag.State, @ViewBag.City , @ViewBag.Pin</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="second-section">
+                                    <h5>Billing Address</h5>
+
+                                    <P>@ViewBag.CustomerName, Mob : (@ViewBag.CustomerMobile)</P>
+                                    <p>@ViewBag.CustomerAddress,</p>
+
+                                    <p>@ViewBag.State, @ViewBag.City , @ViewBag.Pin</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="recipttablman">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr class="table-borderless">
+                                                <th>Product</th>
+                                                <th>Description</th>
+                                                <th>Qty</th>
+                                                <th>Gross Amount</th>
+                                                <th>Discount</th>
+                                                <th>CGST</th>
+                                                <th>SGST</th>
+                                                <th>IGST</th>
+                                                <th>Taxable Amt</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="table-borderless">
+                                                <td class="reciptmang">
+                                                    @item.ProductName<br>
+                                                </td>
+                                                <td class="reciptmang">@item.Description</td>
+                                                <td class="reciptmang">@item.ProductQuantity</td>
+                                                <td class="reciptmang">@item.TotalAmount</td>
+                                                <td>@item.RedeemPrice</td>
+                                                @if (item.CustomerState == "UTTAR PRADESH")
+                                                {
+                                                    <td class="reciptmang">@item.CGST</td>
+                                                    <td class="reciptmang">@item.SGST</td>
+                                                }
+
+                                                else
+                                                {
+                                                    <td class="reciptmang">0</td>
+                                                    <td class="reciptmang">0</td>
+                                                }
+                                                @if (item.CustomerState == "UTTAR PRADESH")
+                                                {
+                                                    <td class="reciptmang">0</td>
+                                                }
+                                                else
+                                                {
+                                                    <td class="reciptmang">@item.IGST</td>
+                                                }
+                                                <td class="reciptmang">@item.TaxableAmt</td>
+                                                <td class="reciptmang">@item.SubTotal</td>
+
+                                            </tr>
+                                            <tr class="table-borderless">
+                                                <td>Guarantee**</td>
+                                                <td>Shipping Charge</td>
+                                                <td class="reciptmang">@item.ProductQuantity</td>
+                                                <td>@item.DeliveryCharge</td>
+
+                                                <td>0</td>
+                                                @if (item.CustomerState == "UTTAR PRADESH")
+                                                {
+                                                    <td class="reciptmang">@item.ShippingCGST</td>
+                                                    <td class="reciptmang">@item.ShippingSGST</td>
+                                                }
+
+                                                else
+                                                {
+                                                    <td class="reciptmang">0</td>
+                                                    <td class="reciptmang">0</td>
+                                                }
+                                                @if (item.CustomerState == "UTTAR PRADESH")
+                                                {
+                                                    <td class="reciptmang">0</td>
+                                                }
+                                                else
+                                                {
+                                                    <td class="reciptmang">@item.ShippingIGST</td>
+                                                }
+                                                <td class="reciptmang">@item.ShippingTaxable</td>
+                                                <td class="reciptmang">@item.DeliveryCharge</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 reciptto">
+                                <p>
+                                    <strong>Total QTY:@item.ProductQuantity</strong> <span class="ttotalpri"><strong>TOTAL PRICE:@item.FinalAmount</strong></span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="reciptdecip">
+                                    <p>@item.VendorName</p>
+                                    <p>@item.Address</p>
+                                    <p><strong>Declaration</strong> </p>
+                                    <p>The goods solid are intended for end user consumption and not for resale.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row footersignature">
+                            <div class="col-md-6">
+                                <div class="reciptdecip11">
+                                    <p>** Condition Apply Please refer to the product page for more details </p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="reciptdecip11">
+                                    <p>Ordered Through</p>
+
+                                    <img src="../../ReceiptFolder/images/logo.png" class="logo11" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="reciptdecip11">
+                                    <p>Authorized Signature</p>
+                                    <img src="@item.Signature" style="width:50px;height:50px" />
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            }
+        }
+    }
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+
+    <script src="../../ReceiptFolder/js/bootstrap.min.js"></script>
+
+    <link href="../../ReceiptFolder/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../ReceiptFolder/css/style.css" rel="stylesheet" />
+</body>
+
+
+
+@*<body>
+        @if (Model != null)
+        {
+            if (Model.lstOrders != null)
+            {
+
+                <table class="auto-style1">
+                    <tr>
+                        <td colspan="2">
+                            <img src="http://demo4.afluex.com/Websitecss/img/logo.png" class="inv-logo img-fluid" style="width: 150px" />
+
+                        </td>
+                        <td style="text-align: right" colspan="3">
+                            <b>
+                                Tax Invoice/Bill of Supply/Cash Memo
+                                <br />
+                                (Original for Recipient)
+                            </b>
+                        </td>
+                    </tr>
+                </table>
+
+                foreach (var item in Model.lstOrders)
+                {
+                    <table class="auto-style1">
+                        <tr style='background-color: #ffffff;box-sizing: border-box;'>
+                            <td colspan="2" style='vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'>
+                                <h3>Sold By : </h3>
+                            </td>
+                            <td style='text-align:right;vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;' colspan="3">
+                                <h3>Billing Address : </h3>
+                            </td>
+                        </tr>
+                        <tr style='background-color: #ffffff;box-sizing: border-box;'>
+                            <td colspan="2" style='vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'>@item.VendorName</td>
+                            <td colspan="3" style='text-align:right;vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'>@ViewBag.CustomerName</td>
+                        </tr>
+                        <tr style='background-color: #ffffff;box-sizing: border-box;'>
+                            <td colspan="2" style='vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'>@item.Address</td>
+                            <td style='text-align:right;vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;' colspan="3">@ViewBag.CustomerAddress</td>
+                        </tr>
+                        <tr style='background-color: #ffffff;box-sizing: border-box;'>
+                            <td colspan="2" style='vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'><b>PAN No:</b> @item.PAN</td>
+                            <td colspan="3" style='text-align:right;vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'>@ViewBag.State, @ViewBag.City , @ViewBag.Pin</td>
+                        </tr>
+                        <tr style='background-color: #ffffff;box-sizing: border-box;'>
+                            <td colspan="2" style='vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'><b>GST Registration No:</b> @item.GSTNo</td>
+                            <td colspan="3" style='text-align:right;vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'>@ViewBag.CustomerMobile</td>
+                        </tr>
+
+                        <tr style='background-color: #ffffff;box-sizing: border-box;'>
+                            <td colspan="2" style='vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'><b>Invoice Number:</b> @item.InvoiceNo</td>
+                            <td colspan="3" style='text-align:right;vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'><b>Invoice Date:</b>@DateTime.Now.ToString("dd/MM/yyyy")</td>
+                        </tr>
+
+
+                        <tr style='color:white;font-weight: 400;box-sizing: border-box;background-color: grey;'>
+
+
+
+                            <th style='border-top: 0;vertical-align: middle;border-bottom-width: 2px;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;text-align: left;'>ITEM</th>
+                            <th style='border-top: 0;vertical-align: middle;border-bottom-width: 2px;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;text-align: left;'>DESCRIPTION</th>
+                            <th style='border-top: 0;vertical-align: middle;border-bottom-width: 2px;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;text-align: left;'>RATE</th>
+                            <th style='border-top: 0;vertical-align: middle;border-bottom-width: 2px;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;text-align: left;'>QTY</th>
+                            <th style='border-top: 0;vertical-align: middle;border-bottom-width: 2px;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;text-align: left;'>TOTAL</th>
+                        </tr>
+
+
+                        <tr style='background-color: #ffffff;box-sizing: border-box;'>
+
+
+
+                            <td style='vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'>@item.ProductName</td>
+                            <td style='vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'>@item.Description</td>
+                            <td style='vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'>@item.MRP</td>
+                            <td style='vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'>@item.ProductQuantity</td>
+                            <td style="vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;">@item.TotalAmount</td>
+                        </tr>
+
+                        <tr style='background-color: #ffffff;box-sizing: border-box;'>
+                            <td colspan="4" style='vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'><b>Total</b></td>
+
+                            <td style="vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;">@item.TotalAmount</td>
+                        </tr>
+                        <tr style='background-color: #ffffff;box-sizing: border-box;'>
+                            <td colspan="4" style='vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'><b>Redeem Points</b></td>
+
+                            <td style="vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;">@item.RedeemPrice</td>
+                        </tr>
+                        <tr style='background-color: #ffffff;box-sizing: border-box;'>
+                            <td colspan="4" style='vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'><b>Sub Total</b></td>
+
+                            <td style="vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;">@item.SubTotal</td>
+                        </tr>
+
+
+
+                        @if (item.CustomerState == "UTTAR PRADESH")
+                        {
+                            <tr style='background-color: #ffffff;box-sizing: border-box;'>
+                                <td colspan="4" style='vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'><b>CGST</b></td>
+
+                                <td style="vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;">@item.CGST</td>
+                            </tr>
+                            <tr style='background-color: #ffffff;box-sizing: border-box;'>
+                                <td colspan="4" style='vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'><b>SGST</b></td>
+
+                                <td style="vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;">@item.SGST</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr style='background-color: #ffffff;box-sizing: border-box;'>
+                                <td colspan="4" style='vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'><b>IGST</b></td>
+
+                                <td style="vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;">@item.IGST</td>
+                            </tr>
+                        }
+                        <tr style='background-color: #ffffff;box-sizing: border-box;'>
+                            <td colspan="4" style='vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'><b>Delivery Charge</b></td>
+
+                            <td style="vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;">@item.DeliveryCharge</td>
+                        </tr>
+                        <tr style='background-color: #ffffff;box-sizing: border-box;'>
+                            <td colspan="4" style='vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'><b>Final Amount</b></td>
+
+                            <td style="vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;">@item.FinalAmount</td>
+                        </tr>
+                        <tr style='background-color: #ffffff;box-sizing: border-box;'>
+                            <td colspan="5" style='vertical-align: middle;border: 1px solid #ddd;padding: 8px;line-height: 1.42857143;'><b>Amount In Words:<br />@item.AmtInwords</b></td>
+
+
+                        </tr>
+                        <tr>
+                            <td colspan="5"></td>
+
+
+                        </tr>
+                        <tr>
+                            <td colspan="5"></td>
+
+
+                        </tr>
+                        <tr>
+                            <td colspan="5"></td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="5"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"></td>
+                            <td>
+                                <img src="@item.Signature" style="width:50px;height:50px" />
+                            </td>
+
+                        </tr>
+                    </table>
+                    <p style="page-break-after: always;">&nbsp;</p>
+
+
+                }
+
+            }
+        }
+    </body>*@
+</html>
