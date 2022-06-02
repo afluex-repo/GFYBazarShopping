@@ -1,0 +1,76 @@
+﻿@model GfyBazar.Models.Home
+
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/CustomerLayout.cshtml";
+}
+
+<main class="main">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/Home/Index"><i class="icon-home"></i>Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+            </ol>
+        </div>
+    </nav>
+    <div class="container">
+        <div id="map">
+            @*<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7525.1404802334755!2d72.81549862263924!3d19.43096606532286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7a943bb46e679%3A0x6d96f769227822e1!2sOswal+Nagari%2C+Nalasopara+East%2C+Nala+Sopara%2C+Maharashtra!5e0!3m2!1sen!2sin!4v1563436723332!5m2!1sen!2sin" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>*@
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                @*<img src="../../images/ContactUS.jpg" />*@
+                <img src="~/images/empty-cart.gif" />
+                @*<h2 class="light-title">Write <strong>Us</strong></h2>
+                    <form action="#">
+                        <div class="form-group required-field">
+                            <label for="contact-name">Name</label>
+                            <input type="text" class="form-control" id="contact-name" name="contact-name" required>
+                        </div><!-- End .form-group -->
+                        <div class="form-group required-field">
+                            <label for="contact-email">Email</label>
+                            <input type="email" class="form-control" id="contact-email" name="contact-email" required>
+                        </div><!-- End .form-group -->
+                        <div class="form-group">
+                            <label for="contact-phone">Phone Number</label>
+                            <input type="tel" class="form-control" id="contact-phone" name="contact-phone">
+                        </div><!-- End .form-group -->
+                        <div class="form-group required-field">
+                            <label for="contact-message">What’s on your mind?</label>
+                            <textarea cols="30" rows="1" id="contact-message" class="form-control" name="contact-message" required></textarea>
+                        </div><!-- End .form-group -->
+                        <div class="form-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div><!-- End .form-footer -->
+                    </form>*@
+            </div><!-- End .col-md-8 -->
+            <div class="col-md-4">
+                <h2 class="light-title">Contact <strong>Details</strong></h2>
+                <div class="contact-info">
+                    @*<div>
+                            <i class="icon-phone"></i>
+                            <p><a href="tel:">0201 203 2032</a></p>
+                            <p><a href="tel:">0201 203 2032</a></p>
+                        </div>*@
+                    <div>
+                        <i class="icon-mobile"></i>
+                        <p><a href="tel:">7991212117</a></p>
+                        @*<p><a href="tel:">302-123-3928</a></p>*@
+                    </div>
+                    <div>
+                        <i class="icon-mail-alt"></i>
+                        <p><a href="mailto:#">grazieforyouventures@gmail.com</a></p>
+                        @*<p><a href="mailto:#">porto@portotemplate.com</a></p>*@
+                    </div>
+                    @*<div>
+                            <i class="icon-skype"></i>
+                            <p>porto_skype</p>
+                            <p>porto_template</p>
+                        </div>*@
+                </div><!-- End .contact-info -->
+            </div><!-- End .col-md-4 -->
+        </div><!-- End .row -->
+    </div><!-- End .container -->
+    <div class="mb-8"></div><!-- margin -->
+</main><!-- End .main -->

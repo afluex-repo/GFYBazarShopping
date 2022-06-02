@@ -1,0 +1,166 @@
+﻿@model GfyBazar.Models.Master
+@{
+    ViewBag.Title = "Brands";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+  
+}
+
+@using (Html.BeginForm("SaveBrand", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    if (TempData["Brand"] != null)
+    {
+        <div class="@TempData["Class"]">
+            @TempData["Brand"]
+        </div>
+    }
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Brand</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        Brand Name <span style="color: red">*</span>
+                        @Html.TextBoxFor(m => m.BrandName, new { @class = "form-control", @Placeholder = "Brand Name", maxlength = "50" })
+                        @Html.HiddenFor(m => m.BrandID, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        Brand Name <span style="color: red">*</span>
+                        <input type="file" name="postedFile" id="Image" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input class="btn btn-success btn-sm" onclick="return validateform()" type="submit" value="Save" id="btnSave" />
+                        <a href="#" class="btn btn-success btn-sm" onclick="return updateBrand()" id="btnUpdate" style="display: none">Update</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <br />
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Brand List</h4>
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered dataTable no-footer">
+                            <thead>
+                                <tr>
+                                    <th>S No.</th>
+                                    <th>Brand Name</th>
+                                    <th>Image</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lstBrands != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var Item in Model.lstBrands)
+                                        {
+                                            <tr class="text-left">
+                                                <td>@i</td>
+                                                <td>@Item.BrandName</td>
+                                                <td><img src="@Item.BrandImage" id="img" height="100" width="100" /></td>
+                                                <td>
+                                                    <a href="#" class="btn btn-primary btn-sm" onclick="editBrand('@Item.BrandName','@Item.BrandID')">Edit</a>
+                                                    <a href="/Master/DeleteBrand/@Item.BrandID" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you wish to delete this Brand ?');">Delete</a>
+                                                </td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                }
+                            </tbody>
+
+
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    
+}
+
+<script src="../../AdminCSS/js/jquery.min.js"></script>
+
+<script>
+
+    function editBrand(brandname, brandid) {
+        $('#BrandName').val(brandname);
+        $('#BrandID').val(brandid);
+        $('#btnSave').hide();
+        $('#btnUpdate').show();
+    }
+
+    function updateBrand() {
+        $(".errortext").removeClass("errortext");
+        if ($('#BrandName').val() == '') {
+            $("#BrandName").addClass('errortext');
+            $('#BrandName').focus();
+            return false;
+        }
+
+        $.ajax({
+            url: "/Master/UpdateBrand",
+            Type: "Get",
+            DataType: "JSON",
+            data: { BrandID: $("#BrandID").val(), BrandName: $("#BrandName").val() },
+            success: function (data) {
+                alert(data.Result);
+                window.location.href = '@Url.Action("Brands", "Master")';
+            }
+
+        });
+    }
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#BrandName').val() == '') {
+            $("#BrandName").addClass('errortext');
+            $('#BrandName').focus();
+            return false;
+        }
+        if ($('#Image').val() == '') {
+            $("#Image").addClass('errortext');
+            $('#Image').focus();
+            alert("Please select  image..!");
+            return false;
+        }
+        return true;
+    }
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#dataTables-example').DataTable({
+            responsive: true,
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ]
+        });
+    });
+</script>
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+

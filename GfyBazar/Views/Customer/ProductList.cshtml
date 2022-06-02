@@ -1,0 +1,422 @@
+﻿@model GfyBazar.Models.Customer
+@{
+    ViewBag.Title = "ProductList";
+    Layout = "~/Views/Shared/CustomerLayout.cshtml";
+}
+<link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+<!-- Customizable CSS -->
+<link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/blue.css">
+<link rel="stylesheet" href="../../assets/css/owl.carousel.css">
+<link rel="stylesheet" href="../../assets/css/owl.transitions.css">
+<link rel="stylesheet" href="../../assets/css/animate.min.css">
+<link rel="stylesheet" href="../../assets/css/rateit.css">
+<link rel="stylesheet" href="../../assets/css/bootstrap-select.min.css">
+<!-- Icons/Glyphs -->
+<link rel="stylesheet" href="../../assets/css/font-awesome.css">
+<!-- Fonts -->
+<link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+    }
+</style>
+<style>
+    .soldout {
+        pointer-events: none;
+        opacity: 0.3;
+        background: #CCC;
+    }
+
+    .box {
+        position: relative;
+        max-width: 600px;
+        width: 90%;
+        height: 308px;
+        background: #fff;
+        box-shadow: 0 0 15px rgba(0,0,0,.1);
+    }
+
+    /* common */
+    .ribbon {
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        position: absolute;
+    }
+
+        .ribbon::before,
+        .ribbon::after {
+            position: absolute;
+            z-index: -1;
+            content: '';
+            display: block;
+            border: 5px solid #2980b9;
+        }
+
+        .ribbon span {
+            position: absolute;
+            display: block;
+            width: 225px;
+            padding: 15px 0;
+            background-color: #962022;
+            box-shadow: 0 5px 10px rgba(0,0,0,.1);
+            color: #fff;
+            font: 700 18px/1 'Lato', sans-serif;
+            text-shadow: 0 1px 1px rgba(0,0,0,.2);
+            text-transform: uppercase;
+            text-align: center;
+            z-index: 99;
+        }
+
+    /* top left*/
+    .ribbon-top-left {
+        top: -10px;
+        left: -10px;
+    }
+
+        .ribbon-top-left::before,
+        .ribbon-top-left::after {
+            border-top-color: transparent;
+            border-left-color: transparent;
+        }
+
+        .ribbon-top-left::before {
+            top: 0;
+            right: 0;
+        }
+
+        .ribbon-top-left::after {
+            bottom: 0;
+            left: 0;
+        }
+
+        .ribbon-top-left span {
+            right: -25px;
+            top: 30px;
+            transform: rotate(-45deg);
+        }
+
+    /* top right*/
+    .ribbon-top-right {
+        top: -10px;
+        right: -10px;
+    }
+
+        .ribbon-top-right::before,
+        .ribbon-top-right::after {
+            border-top-color: transparent;
+            border-right-color: transparent;
+        }
+
+        .ribbon-top-right::before {
+            top: 0;
+            left: 0;
+        }
+
+        .ribbon-top-right::after {
+            bottom: 0;
+            right: 0;
+        }
+
+        .ribbon-top-right span {
+            left: -25px;
+            top: 30px;
+            transform: rotate(45deg);
+        }
+
+    /* bottom left*/
+    .ribbon-bottom-left {
+        bottom: -10px;
+        left: -10px;
+    }
+
+        .ribbon-bottom-left::before,
+        .ribbon-bottom-left::after {
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+        }
+
+        .ribbon-bottom-left::before {
+            bottom: 0;
+            right: 0;
+        }
+
+        .ribbon-bottom-left::after {
+            top: 0;
+            left: 0;
+        }
+
+        .ribbon-bottom-left span {
+            right: -25px;
+            bottom: 30px;
+            transform: rotate(225deg);
+        }
+
+    /* bottom right*/
+    .ribbon-bottom-right {
+        bottom: -10px;
+        right: -10px;
+    }
+
+        .ribbon-bottom-right::before,
+        .ribbon-bottom-right::after {
+            border-bottom-color: transparent;
+            border-right-color: transparent;
+        }
+
+        .ribbon-bottom-right::before {
+            bottom: 0;
+            left: 0;
+        }
+
+        .ribbon-bottom-right::after {
+            top: 0;
+            right: 0;
+        }
+
+        .ribbon-bottom-right span {
+            left: -25px;
+            bottom: 30px;
+            transform: rotate(-225deg);
+        }
+
+    @@media (min-width: 320px) and (max-width: 568px) {
+        .product .product-image .image img {
+          
+            height: 184px;
+           
+        }
+    }
+    @@media (max-width: 991px) and (min-width: 768px)
+    {
+         .product .product-image .image img {
+          
+            height: 184px;
+           
+        }
+    }
+
+</style>
+
+
+
+
+<!-- /.breadcrumb -->
+<div class="body-content outer-top-xs">
+    <div class=''>
+        <div class='row'>
+
+            <!-- /.sidebar -->
+            <div class='col-md-12'>
+                <!-- ========================================== SECTION – HERO ========================================= -->
+
+
+                <div class="search-result-container ">
+                    <div id="myTabContent" class="tab-content category-list">
+                        <div class="tab-pane active " id="grid-container">
+                            <div class="category-product">
+                                <div class="row">
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstProducts != null)
+                                        {
+                                            foreach (var item in Model.lstProducts)
+                                            {
+                                                <div class="col-sm-6 col-md-2 wow fadeInUp">
+
+                                                    <div class="products">
+                                                        <div class="product">
+
+                                                            <div class="product-image">
+                                                                <div class="image"> <a href="/Customer/QuickView?pid=@item.EncryptKey"><img src="http://demo4.afluex.com/@item.PrimaryImage" alt=""></a> </div>
+                                                                <!-- /.image -->
+
+
+                                                            </div>
+                                                            <!-- /.product-image -->
+
+                                                            <div class="product-info text-center">
+                                                                <h3 class="name" style="height: 30px;"><a href="/Customer/QuickView?pid=@item.EncryptKey">@item.ProductName</a></h3>
+                                                                @*<div class="rating rateit-small"></div>*@
+                                                                <div class="description" style="color:blue">Redeem Point @item.RedeemPrice</div>
+                                                                <div class="product-price"> <span class="price"> @item.OfferedPrice </span> <span class="price-before-discount"> @item.MRP</span> </div>
+                                                                <!-- /.product-price -->
+
+                                                            </div>
+                                                            <!-- /.product-info -->
+                                                            <!-- /.cart -->
+
+                                                        </div>
+                                                        <!-- /.product -->
+
+                                                    </div>
+
+                                                    <!-- /.products -->
+                                                </div>
+                                            }
+                                        }
+                                    }
+                                    <!-- /.item -->
+                                    <!-- /.item -->
+                                </div>
+                                <!-- /.row -->
+                            </div>
+                            <!-- /.category-product -->
+
+                        </div>
+                        <!-- /.tab-pane -->
+                        <!-- /.tab-pane #list-container -->
+                    </div>
+                    <!-- /.tab-content -->
+                    @*<div class="clearfix filters-container">
+                            <div class="text-right">
+                                <div class="pagination-container">
+                                    <ul class="list-inline list-unstyled">
+                                        <li class="prev"><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                                        <li><a href="#">1</a></li>
+                                        <li class="active"><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li class="next"><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                    </ul>
+                                    <!-- /.list-inline -->
+                                </div>
+                                <!-- /.pagination-container -->
+                            </div>
+                            <!-- /.text-right -->
+
+                        </div>*@
+                    <!-- /.filters-container -->
+
+                </div>
+                <!-- /.search-result-container -->
+
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        <!-- ============================================== BRANDS CAROUSEL ============================================== -->
+        <!-- /.logo-slider -->
+        <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
+    </div>
+    <!-- /.container -->
+
+</div>
+
+
+
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<script>
+    //call paginate
+    $('#example').paginate();
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+    function closeloader() {
+        $("#divload").css({ 'display': '' });
+    }
+</script>
+<script src="../../AdminCSS/js/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+            if ($(".pagenum:last").val() <= $(".rowcount").val()) {
+                var pagenum = parseInt($(".pagenum:last").val()) + 1;
+                getresult(pagenum);
+            }
+        }
+    });
+    function getresult(pageno) {
+
+    }
+</script>
+<script>
+
+    function getvalue(i, varientname) {
+        $("#divload").css({ 'display': '' });
+        var tr = [];
+        var j = 1;
+        $("#example").html('')
+        $("#example").empty();
+        $.ajax({
+            url: "/Customer/CheckedItem",
+            Type: "Get",
+            DataType: "JSON",
+            data: { VarientDetails: i, Varient: varientname, Status: $('#Status').val(), MainCategoryID: $('#MainCategoryID').val(), CategoryID: $('#CategoryID').val(), SubCategoryID: $('#SubCategoryID').val() },
+            success: function (data) {
+
+                if (data.lstProducts != null) {
+                    for (var i = 0; i < data.lstProducts.length; i++) {
+                        if (data.lstProducts[i].SoldOutCss == "soldout") {
+
+                        }
+                        else {
+
+                        }
+                        $("#example").append("<li class='col-md-3'><div class='product' style='margin-bottom: 0.3rem;'><figure class='product-image-container'><a href='/Customer/QuickView?pid=" + data.lstProducts[i].EncryptKey + "' class='product-image'><img src='../../" + data.lstProducts[i].PrimaryImage + "' alt='product' style='height:200px;width:225px;' /> </a></figure> <div class='product-details'><div class='ratings-container'> <div class='product-ratings'><span class='ratings' style='width: 80%'></span></div></div><h2 class='product-title'><a href='/Customer/QuickView?pid=" + data.lstProducts[i].EncryptKey + "'>" + data.lstProducts[i].Description + "</a> <input type='hidden' value='" + data.lstProducts[i].ProductID + "' /></h2><div class='price-box'> <span class='product-price'>" + data.lstProducts[i].BrandName + "</span></div> <div class='product-action'><span>" + data.lstProducts[i].Description + "</span></div></div></div></li>");
+
+                    }
+
+
+                }
+                $("#divload").css({ 'display': 'none' });
+
+            }
+
+        });
+
+
+    }
+
+
+
+
+
+
+    function QuickView(productid) {
+        // var ProductID = $("#ProductID").val();
+        //var sizeID = $("#SizeID").val();
+        //var unitID = document.getElementById("hdunitid").value;
+        //var colorid = $("#ColorID").val();
+        //var materialid = $("#MaterialID").val();
+        //var flavorid = $("#FlavorID").val();
+        //var rate = document.getElementById("hdofferedprice").value;
+
+        $.ajax({
+            url: "/Customer/QuickView",
+            Type: "Get",
+            DataType: "JSON",
+            data: { ProductID: productid },
+            success: function (data) {
+                if (data.Result == "1") {
+                    alert(data.Description);
+                    //$("#divOTP").hide();
+                    //$("#divSubmit").hide();
+                    //$("#CustomerName").val('');
+                    //$("#Contact").val('');
+                }
+                else if (data.Result == "2") {
+                    alert('Please Login to continue..');
+                }
+                else {
+                    alert(data.Result);
+                }
+            }
+        });
+
+    }
+    function shortvalue() {
+        debugger;
+        var value = $('#orderby').val();
+        var pathname = window.location.href;
+        window.location.href = pathname + '&' + "value=" + value;
+    }
+</script>

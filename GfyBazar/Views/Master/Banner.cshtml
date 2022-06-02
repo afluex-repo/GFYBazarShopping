@@ -1,0 +1,121 @@
+﻿@model GfyBazar.Models.Master
+
+@{
+    ViewBag.Title = "Banner";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("SaveBanner", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Banner</h4>
+
+
+            @*<div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label> Banner Name <span style="color: red">*</span></label>
+                        @Html.TextBoxFor(m => m.BannerName, new { @class = "form-control", @Placeholder = "SubCategory Name" })
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            Banner Description
+                        </label>
+                        @Html.TextAreaFor(m => m.BannerDescription, new { @class = "form-control", @Placeholder = "SubCategory Name" })
+
+                    </div>
+                </div>
+
+            </div>*@
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>
+                            Banner Image <span style="color: red">*</span>
+                        </label>
+                        <input type="file" name="postedFile" id="Image" onchange="readURL(this)" />
+                        <img src="@Model.Images" id="ContentPlaceHolder1_imgProductImage" class="fileinput-preview thumbnail" style="width: 150px; height: 100px;" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input class="btn btn-success btn-sm" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="Save" />
+                        <a class="btn btn-primary btn-sm" href="/Master/BannerList">Back To List</a>
+                    </div>
+                  
+                    <p style="color: @TempData["Class"]">
+                        @TempData["Banner"]
+                    </p>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+}
+
+
+
+<script>
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        //if ($('#BannerName').val() == '') {
+        //    $("#BannerName").addClass('errortext');
+        //    $('#BannerName').focus();
+        //    return false;
+        //}
+
+        if ($('#Image').val() == '') {
+            $("#Image").addClass('errortext');
+            $('#Image').focus();
+            alert("Please select  image..!");
+            return false;
+        }
+        return true;
+    }
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ContentPlaceHolder1_imgProductImage')
+                    .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+@*<script>
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true,
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ]
+            });
+        });
+    </script>*@
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+
+
+
