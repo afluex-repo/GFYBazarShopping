@@ -102,6 +102,5 @@ E:\Repository-Projects\repository\GFYBazarShopping\GfyBazar\bin\Newtonsoft.Json.
 E:\Repository-Projects\repository\GFYBazarShopping\GfyBazar\bin\System.Net.Http.Formatting.xml
 E:\Repository-Projects\repository\GFYBazarShopping\GfyBazar\bin\System.Web.Http.xml
 E:\Repository-Projects\repository\GFYBazarShopping\GfyBazar\bin\System.Web.Http.WebHost.xml
-E:\Repository-Projects\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.csprojResolveAssemblyReference.cache
 E:\Repository-Projects\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.dll
 E:\Repository-Projects\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.pdb
