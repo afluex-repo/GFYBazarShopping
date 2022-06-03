@@ -559,8 +559,8 @@ button.bg-danger:hover {
     color: #fff;
 }
 .btn-info {
-	background-color: #009efb;
-	border: 1px solid #009efb
+	background: linear-gradient(-45deg, #5ca47a, #1ca3de);
+	border: 1px solid #5ca47a;
 }
 .btn-info:hover,
 .btn-info:focus,
@@ -1370,7 +1370,7 @@ button.bg-danger:hover {
 -----------------------*/
 
 .header {
-	background: linear-gradient(-45deg, #5ca47a, #5ca47a);
+	background: linear-gradient(-45deg, #5ca47a, #1ca3de);
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	left: 0;
 	position: fixed;
@@ -1384,6 +1384,7 @@ button.bg-danger:hover {
 	height: 60px;
 	padding: 0 20px;
 	position: relative;
+    background:#f3f3f3;
 	text-align: center;
 	width: 240px;
 	z-index: 1;
@@ -1394,7 +1395,7 @@ button.bg-danger:hover {
 	line-height: 60px;
 }
 .header .header-left .logo img {
-    max-height: 40px;
+    max-height: 53px;
     width: auto;
 }
 .header-left .logo.logo-small {
@@ -1652,7 +1653,7 @@ html.menu-opened body {
 -----------------------*/
 
 .sidebar {
-    background-color: #fff;
+    background-color: #f3f3f3;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     bottom: 0;
     left: 0;
@@ -1702,7 +1703,7 @@ html.menu-opened body {
     color: #fff;
 }
 .sidebar-menu li.active a {
-    background-color: #5ca47a;
+    background: linear-gradient(-45deg, #5ca47a, #1ca3de);
     color: #fff;
 }
 .menu-title {
@@ -1911,6 +1912,7 @@ html.menu-opened body {
 .login-wrapper .loginbox .login-right {
     align-items: center;
     display: flex;
+    background:#79b593;
     justify-content: center;
     padding: 40px;
     width: 400px;
@@ -4010,4 +4012,9 @@ table.table-inbox tbody tr.checked {
 	.page-header .breadcrumb {
 		display: none;
 	}
+}
+
+.bg-gradient
+{
+    background: linear-gradient(-45deg, #5ca47a, #1ca3de);
 }
