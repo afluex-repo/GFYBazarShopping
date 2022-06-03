@@ -18,7 +18,7 @@ a {
 }
 .top-bar .cnt-account ul > li a:hover,
 .top-bar .cnt-account ul > li a:focus {
-  color: #fff;
+  color:#5ca47a;
 }
 .top-bar .cnt-block ul li a .caret {
   color: rgba(255,255,255,0.8);
@@ -242,17 +242,17 @@ a {
 }
 .single-product .product-tabs .nav.nav-tabs.nav-tab-cell li a:hover,
 .single-product .product-tabs .nav.nav-tabs.nav-tab-cell li a:focus {
-  background: #0f6cb2;
+  background: #5ca47a;
 }
 .single-product .product-tabs .nav.nav-tabs.nav-tab-cell li a:hover:after,
 .single-product .product-tabs .nav.nav-tabs.nav-tab-cell li a:focus:after {
-  border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #0f6cb2;
+  border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #5ca47a;
 }
 .single-product .product-tabs .nav.nav-tabs.nav-tab-cell li.active a {
-  background: #0f6cb2;
+  background: #5ca47a;
 }
 .single-product .product-tabs .nav.nav-tabs.nav-tab-cell li.active a:after {
-  border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #0f6cb2;
+  border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #5ca47a;
 }
 .cart .action .add-cart-button .btn.btn-primary.icon:hover,
 .cart .action .add-cart-button .btn.btn-primary.icon:focus {
