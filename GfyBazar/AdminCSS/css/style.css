@@ -3730,7 +3730,7 @@ table.table-inbox tbody tr.checked {
 		width: 100%;
 	}
 	.mobile_btn {
-		color: #fff !important;
+		/*color: #fff !important;*/
 		cursor: pointer;
 		display: block;
 		font-size: 24px;
