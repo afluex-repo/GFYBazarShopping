@@ -183,6 +183,17 @@ namespace GfyBazar.Models
             return ds;
         }
 
+        //public DataSet MainCategory()
+        //{
+        //    SqlParameter[] para = {
+        //                              new SqlParameter("@MainCategoryName", MainCategoryName),
+        //                          new SqlParameter("@AddedBy", AddedBy),
+        //     new SqlParameter("@Images", Images)
+        //    };
+        //    DataSet ds = Connection.ExecuteQuery("SaveMainCategory", para);
+        //    return ds;
+        //}
+
         public DataSet UpdateMainCategory()
         {
             SqlParameter[] para = {

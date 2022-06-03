@@ -267,7 +267,7 @@ namespace GfyBazar.Controllers
                     Master obj = new Master();
                     obj.MainCategoryID = r["PK_MainCategoryID"].ToString();
                     obj.MainCategoryName = r["MainCategoryName"].ToString();
-                    obj.Images = r["Images"].ToString();
+                    obj.Images = r["ImageUrl"].ToString();
                     lst.Add(obj);
                 }
                 model.lstCategory = lst;
@@ -289,6 +289,7 @@ namespace GfyBazar.Controllers
                 }
                 model.Images = "../images/MainCategoryImage/" + path;
                 model.AddedBy = Session["Pk_AdminId"].ToString();
+
                 DataSet ds = model.SaveMainCategory();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
