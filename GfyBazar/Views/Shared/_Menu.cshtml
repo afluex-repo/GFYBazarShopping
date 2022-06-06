@@ -10,7 +10,8 @@
         foreach (var item1 in Model.lstMainCategory)
         {
             <li class="dropdown menu-item">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-shopping-bag" aria-hidden="true"></i>@item1.MainCategoryName</a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="@item1.PrimaryImage" class="cat_icon" /><span class="ml-10"> @item1.MainCategoryName</span></a>
+                @*<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-shopping-bag" aria-hidden="true"></i>@item1.MainCategoryName</a>*@
                 <ul class="dropdown-menu mega-menu">
                     <li class="yamm-content">
                         <div class="row">
