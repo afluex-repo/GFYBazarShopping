@@ -535,6 +535,7 @@ namespace GfyBazar.Models
 
                         obj.MainCategoryID = r["PK_MainCategoryID"].ToString();
                         obj.MainCategoryName = r["MainCategoryName"].ToString();
+                        obj.PrimaryImage = r["Images"].ToString();
 
                         lstMainCategory.Add(obj);
                     }
