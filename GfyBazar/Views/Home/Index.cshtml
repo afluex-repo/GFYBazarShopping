@@ -9,7 +9,7 @@
     <div class="row">
         <!-- ============================================== SIDEBAR ============================================== -->
         <div class="col-xs-12 col-sm-12 col-md-3 sidebar">
-            <div class="side-menu animate-dropdown outer-bottom-xs">
+            @*<div class="side-menu animate-dropdown outer-bottom-xs">
                 <div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Categories</div>
                 <nav class="yamm megamenu-horizontal" role="navigation">
                     <ul class="nav">
@@ -321,12 +321,12 @@
                         </li>
                     </ul><!-- /.nav -->
                 </nav><!-- /.megamenu-horizontal -->
-            </div>
-    <!-- ================================== TOP NAVIGATION ================================== --
+            </div>*@
+    <!-- ================================== TOP NAVIGATION ================================== -->
     <div class="side-menu animate-dropdown outer-bottom-xs">
         <div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Categories</div>
-       @*@{Html.RenderAction("Menu", "Home", new { area = "" }); }*@
-                <!-- /.megamenu-horizontal --
+       @{Html.RenderAction("Menu", "Home", new { area = "" }); }
+                <!-- /.megamenu-horizontal -->
             </div>
             <!-- /.side-menu -->
             <!-- ================================== TOP NAVIGATION : END ================================== -->
@@ -350,7 +350,7 @@
                                                     <div class="row product-micro-row">
                                                         <div class="col col-xs-12">
                                                             <div class="product-image">
-                                                                <div class="image"> <a onclick="return openloader();" href="/Home/ProductWithOfferList?id=@item.EncryptKey"> <img style="width:238px;height:89px" src="http://demo4.afluex.com/@item.OfferImage" alt=""> </a> </div>
+                                                                <div class="image"> <a onclick="return openloader();" href="/Home/ProductWithOfferList?id=@item.EncryptKey"> <img style="width:238px;height:89px" src="@item.OfferImage" alt=""> </a> </div>
                                                                 <!-- /.image -->
 
                                                             </div>
@@ -409,10 +409,6 @@
                     </div>
                 }
             }
-
-
-
-
             <!-- ============================================== Testimonials: END ============================================== -->
 
             @*<a style="cursor:pointer" href="https://play.google.com/store/apps/details?id=com.dwpay"><div class="home-banner"> <img src="../../assets/images/banners/LHS-banner.jpg" alt="Image"> </div></a>*@
@@ -431,7 +427,7 @@
                         {
                             foreach (var item in Model.lstBanner)
                             {
-                                <div class="item" style="background-image: url(http://demo4.afluex.com/@item.BannerImage);">
+                                <div class="item" style="background-image: url(/@item.BannerImage);">
                                     <div class="container-fluid">
 
 
@@ -521,7 +517,7 @@
                                                 <div class="products">
                                                     <div class="product">
                                                         <div class="product-image">
-                                                            <div class="image"> <a onclick="return openloader();" href="/Customer/QuickView?pid=@Item.ProductID"><img src="http://demo4.afluex.com/@Item.PrimaryImage" alt=""></a> </div>
+                                                            <div class="image"> <a onclick="return openloader();" href="/Customer/QuickView?pid=@Item.ProductID"><img src="/@Item.PrimaryImage" alt=""></a> </div>
                                                             <!-- /.image -->
                                                             @*<div class="tag new"><span>new</span></div>*@
                                                         </div>
@@ -637,7 +633,7 @@
                                             <div class="products">
                                                 <div class="product">
                                                     <div class="product-image">
-                                                        <div class="image"> <a onclick="return openloader();" href="/Customer/QuickView?pid=@Item.ProductID"><img src="http://demo4.afluex.com/@Item.PrimaryImage" alt=""></a> </div>
+                                                        <div class="image"> <a onclick="return openloader();" href="/Customer/QuickView?pid=@Item.ProductID"><img src="/@Item.PrimaryImage" alt=""></a> </div>
                                                         <!-- /.image -->
                                                         @*<div class="tag hot" style="width:100px"><span>@Item.DisplayName</span></div>*@
                                                     </div>

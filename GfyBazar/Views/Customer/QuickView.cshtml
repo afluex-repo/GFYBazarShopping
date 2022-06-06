@@ -194,9 +194,9 @@
                                             foreach (var item in Model.lstproductimages)
                                             {
                                                 <div class="single-product-gallery-item" id="slide_@i">
-                                                    <a data-lightbox="image-1" data-title="Gallery" href="http://demo4.afluex.com/@item.SecondaryImage">
-                                                        <img class="img-responsive" alt="" src="http://demo4.afluex.com/@item.SecondaryImage"
-                                                             data-echo="http://demo4.afluex.com/@item.SecondaryImage" />
+                                                    <a data-lightbox="image-1" data-title="Gallery" href="/@item.SecondaryImage">
+                                                        <img class="img-responsive" alt="" src="/@item.SecondaryImage"
+                                                             data-echo="/@item.SecondaryImage" />
                                                     </a>
                                                 </div>
                                                 i++;
@@ -225,8 +225,8 @@
                                                 {
                                                     <div class="item">
                                                         <a class="horizontal-thumb active" data-target="#owl-single-product" data-slide="@j" href="#slide_@j">
-                                                            <img class="img-responsive" width="85" alt="" src="http://demo4.afluex.com/@item.SecondaryImage"
-                                                                 data-echo="http://demo4.afluex.com/@item.SecondaryImage" />
+                                                            <img class="img-responsive" width="85" alt="" src="/@item.SecondaryImage"
+                                                                 data-echo="/@item.SecondaryImage" />
                                                         </a>
                                                     </div>
                                                     j++;
@@ -632,7 +632,7 @@
                                             <div class="product">
                                                 <div class="product-image">
                                                     <div class="image">
-                                                        <a href="/Customer/QuickView?pid=@Item.ProductID"><img src="http://demo4.afluex.com/@Item.PrimaryImage" alt=""></a>
+                                                        <a href="/Customer/QuickView?pid=@Item.ProductID"><img src="/@Item.PrimaryImage" alt=""></a>
                                                     </div><!-- /.image -->
 
 
