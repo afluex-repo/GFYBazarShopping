@@ -271,7 +271,6 @@ if (jQuery('.price-slider').length > 0) {
         handle: "square"
 
     });
-
 }
 
 });
@@ -310,8 +309,6 @@ jQuery(function(){
         singleItem: true,
         pagination: true
     });
-
-  
 });
 
 
@@ -331,8 +328,4 @@ jQuery(function () {
 /*  TOOLTIP 
 /*===================================================================================*/
 jQuery("[data-toggle='tooltip']").tooltip(); 
-
-
-
-
 })
