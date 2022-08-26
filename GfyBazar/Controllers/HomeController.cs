@@ -935,5 +935,10 @@ namespace GfyBazar.Controllers
         {
             return View();
         }
+
+        public ActionResult Maintenance()
+        {
+            return View();
+        }
     }
 }
