@@ -162,6 +162,7 @@ namespace GfyBazar.Models
         public List<Master> lstStorage { get; set; }
         public string FeatureTypeId { get; set; }
         public string FeatureTypeName { get; set; }
+        
 
         #region MainCategory
 
