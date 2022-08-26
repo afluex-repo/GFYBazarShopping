@@ -11,10 +11,8 @@ namespace GfyBazar.Models
         static Connection()
         {
             try
-
-
             {
-                connectionString = "Data Source=103.48.51.111,1232;Initial Catalog=dwpeDBTest;User Id=dwpeusertest; Password =dwpe123!@#@;Integrated Security=false;";
+                connectionString = "Data Source=103.48.51.111,1232;Initial Catalog=gfyshopping;User Id=gyfusershopping; Password =gyf@!123#!;Integrated Security=false;";
                 
             }
             catch (Exception)

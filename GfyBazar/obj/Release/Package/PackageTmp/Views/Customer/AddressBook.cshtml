@@ -1,0 +1,264 @@
+﻿@model GfyBazar.Models.Customer
+
+@{
+    ViewBag.Title = "AddressBook";
+    Layout = "~/Views/Shared/CustomerLayout.cshtml";
+}
+
+@using (Html.BeginForm("SaveAddress", "Customer", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-inner">
+                <ul class="list-inline list-unstyled">
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                    <li><a href="#">Address Book</a></li>
+                </ul>
+            </div><!-- /.breadcrumb-inner -->
+        </div><!-- /.container -->
+    </div>
+
+    <main class="main">
+
+        <div class="sign-in-page spaceacc">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 order-lg-last dashboard-content">
+                        <h2>Address</h2>
+                        <p style="color:red;">@TempData["SaveAddress"]</p>
+                        <form action="#">
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group required-field">
+                                                <label for="acc-mname">Name</label>
+                                                @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control",    })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group required-field">
+                                                <label for="acc-mname">Contact</label>
+                                                @Html.TextBoxFor(m => m.Contact, new { @class = "form-control", @maxlength = "10", @onkeypress = "return isNumberOrDecimal(event);" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group required-field">
+                                                <label for="acc-name">HouseNo</label>
+                                                @Html.TextBoxFor(m => m.HouseNo, new { @class = "form-control" })
+                                                @Html.HiddenFor(m => m.FK_AddressID)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group required-field">
+                                                <label for="acc-mname">Locality</label>
+                                                @Html.TextBoxFor(m => m.Locality, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group required-field">
+                                                <label for="acc-mname">Landmark</label>
+                                                @Html.TextBoxFor(m => m.Landmark, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group required-field">
+                                                <label for="acc-mname">Pincode</label>
+                                                @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @maxlength = "6", @onkeypress = "return isNumberOrDecimal(event);" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group required-field">
+                                                <label for="acc-mname">Address Type</label>
+                                                @Html.DropDownListFor(m => m.AddressType, new SelectList(ViewBag.TypeAddress, "Value", "Text"), new { @class = "form-control", @onchange = "return GetCharges();" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group required-field">
+                                                <label for="acc-mname">Is Default</label>
+                                                <input type="checkbox" id="IsDefault" name="IsDefault" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <br />
+                                                <input class="btn btn-success btn-sm" onclick="return validateform()" type="submit" value="Save" id="btnSave" />
+                                                <a href="#" class="btn btn-success btn-sm" onclick="return updateadd()" id="btnUpdate" style="display: none">Update</a>
+                                                @*    <input type="submit" id="Update" name="Update" value="Update" class="btn btn-primary" />*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-2"></div>
+
+                            @*<div class="form-footer">
+                                    <div class="form-footer-right">
+                                        <input type="submit" id="Update" name="Update" value="Update" class="btn btn-primary" />
+
+                                    </div>
+                                </div>*@
+                        </form>
+
+                        <h4 class="card-title">Address List</h4>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table id="order-listing" class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>S No.</th>
+                                                <th>Address Type</th>
+                                                <th>HouseNo</th>
+                                                <th>Locality</th>
+                                                <th>Landmark</th>
+                                                <th>Pincode</th>
+                                               
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null)
+                                            {
+                                                if (Model.lstOrders != null)
+                                                {
+                                                    int i = 1;
+                                                    foreach (var Item in Model.lstOrders)
+                                                    {
+                                                        <tr class="text-left">
+                                                            <td>@i</td>
+                                                            <td>@Item.AddressType</td>
+                                                            <td>@Item.HouseNo</td>
+                                                            <td>@Item.Locality</td>
+                                                            <td>@Item.Landmark</td>
+                                                            <td>@Item.Pincode</td>
+                                                           
+                                                            <td>
+                                                                <a href="#" class="btn btn-sm btn-success" onclick="editc('@Item.AddressType','@Item.FK_AddressID','@Item.HouseNo','@Item.Locality','@Item.Landmark','@Item.Pincode','@Item.IsDefault','@Item.DisplayName','@Item.Contact')">Edit</a>
+                                                                <a href="/Customer/DeleteAddress/@Item.FK_AddressID" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you wish to delete this ?');">Delete</a>
+                                                            </td>
+                                                        </tr>
+                                                        i++;
+                                                    }
+                                                }
+                                            }
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    @{Html.RenderAction("CustomerLeftMenu", "Customer", new { area = "" });}
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-5"></div>
+    </main>
+                        }
+<script src="../../AdminCSS/js/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+
+    function editc(addtype, id, house, local, landmark, pin, IsDefault,DisplayName,Contact) {
+        $('#AddressType').val(addtype);
+        $('#FK_AddressID').val(id);
+        $('#HouseNo').val(house);  
+        $('#Locality').val(local);
+        $('#Landmark').val(landmark); 
+        $('#Pincode').val(pin);
+        $('#IsDefault').val(IsDefault);
+        if ($('#IsDefault').val() == "True")
+        {
+            //$('#IsDefault').is(":checked")
+            $('#IsDefault').prop('checked', true);
+        }
+ 
+        $('#DisplayName').val(DisplayName);
+        $('#Contact').val(Contact);
+        $('#btnSave').hide();
+        $('#btnUpdate').show();
+
+    }
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#HouseNo').val() == '') {
+            $("#HouseNo").addClass('errortext');
+            $('#HouseNo').focus();
+            return false;
+        }
+        if ($('#Locality').val() == '') {
+            $("#Locality").addClass('errortext');
+            $('#Locality').focus();
+            return false;
+        }
+        if ($('#Landmark').val() == '') {
+            $("#Landmark").addClass('errortext');
+            $('#Landmark').focus();
+            return false;
+        }
+        if ($('#HouseNo').val() == '') {
+            $("#HouseNo").addClass('errortext');
+            $('#HouseNo').focus();
+            return false;
+        }
+        $("#divload").css({ 'display': '' });
+        return true;
+    }
+    function updateadd() {
+        $(".errortext").removeClass("errortext");
+        if ($('#HouseNo').val() == '') {
+            $("#HouseNo").addClass('errortext');
+            $('#HouseNo').focus();
+            return false;
+        }
+        if ($('#Locality').val() == '') {
+            $("#Locality").addClass('errortext');
+            $('#Locality').focus();
+            return false;
+        }
+        if ($('#Landmark').val() == '') {
+            $("#Landmark").addClass('errortext');
+            $('#Landmark').focus();
+            return false;
+        }
+        if ($('#HouseNo').val() == '') {
+            $("#HouseNo").addClass('errortext');
+            $('#HouseNo').focus();
+            return false;
+        }
+        $("#divload").css({ 'display': '' });
+        $.ajax({
+            url: "/Customer/UpdateAddress",
+            Type: "Get",
+            DataType: "JSON",
+            data: {
+                AddressType: $("#AddressType").val(),
+                FK_AddressID: $("#FK_AddressID").val(), Landmark: $("#Landmark").val(), Locality: $("#Locality").val(),
+                Pincode: $("#Pincode").val(), HouseNo: $("#HouseNo").val(), IsDefault: $("#IsDefault").val(), DisplayName: $("#DisplayName").val(), Contact: $("#Contact").val()
+            },
+            success: function (data) {
+                //  alert(data.Result);
+                window.location.href = '@Url.Action("AddressBook", "Customer")';
+            }
+
+        });
+    }
+
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+</script>

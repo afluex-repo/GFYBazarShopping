@@ -381,7 +381,7 @@ namespace GfyBazar.Models
                                     new SqlParameter("@FK_SubCategoryID", SubCategoryID),
                                     new SqlParameter("@ProductName", ProductName),
                                     new SqlParameter("@Description", Description),
-
+                                    new SqlParameter("@PrimaryImage",PrimaryImage),
                                     new SqlParameter("@HSNNo", HSNNo),
                                     new SqlParameter("@IsNew",IsNew ),
                                     new SqlParameter("@IsBestSeller", IsBestSeller),
@@ -1188,7 +1188,8 @@ namespace GfyBazar.Models
 								  new SqlParameter("@dtProductImages", dtProductImages),
                                   new SqlParameter("@DeliveryCharge", DeliveryCharge),
                                   new SqlParameter("@ShoopingPerc", ShoppingPerc),
-                                  new SqlParameter("@dtProductVariant", dtProductVariant)
+                                  new SqlParameter("@dtProductVariant", dtProductVariant),
+                                new SqlParameter("@Images", Images)
                                     // new SqlParameter("@IsTimeProduct", IsTimeProduct1),
                                   };
             DataSet ds = Connection.ExecuteQuery("UpdateProduct", para);

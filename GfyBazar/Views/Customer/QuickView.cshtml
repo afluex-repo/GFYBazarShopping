@@ -229,7 +229,12 @@
         <div class='row single-product'>
             <div class='col-md-3 sidebar'>
                 <div class="sidebar-module-container">
-                    <a href="https://play.google.com/store/apps/details?id=com.dwpay"><div class="home-banner"> <img src="../../assets/images/banners/LHS-banner.jpg" class="img-fluid" style="width:100%" alt="Image"> </div></a>
+                    <a style="cursor:pointer" href="#"><div class="home-banner"> <img src="../../assets/images/banners/LHS-banner.jpg" alt="Image"> </div></a>
+                    @*https://play.google.com/store/apps/details?id=com.dwpay*@
+
+
+
+
                     <div class="sidebar-widget  wow fadeInUp outer-top-vs ">
                         <div id="advertisement" class="advertisement">
                             @if (Model != null)
@@ -372,19 +377,22 @@
                                                             {
                                                                 //href="/Customer/QuickView?pid=@Model.EncryptKey&colorid=@item.ColorID"
                                                                 <li style="display: inline-flex;margin-right: .4rem;margin-bottom: .4rem;" title="@item.ColorName" class="@item.CssClass" id="lstColor_@i">
-                                                                    <a class="@item.Status" onclick="return colorChange(@i,@item.ColorID)" style="border: 1px solid black;cursor:pointer;height:35px;width:35px;background-color: @item.ColorCode" @*onclick="return colorChange(@item.ColorID);" *@>
-
-                                                                        <p style="padding-left: 6px;padding-top: 5px;color: #541a24;font-size: 14px;font-style: italic">
+                                                                    <a class="@item.Status" onclick="return colorChange(@i,@item.ColorID)" style="border: 1px solid black;cursor:pointer;height:35px;width:35px;background-color:@item.ColorCode">
+                                                                        <p style="padding-left: 6px;padding-top: 10px;color: #541a24;font-size: 14px;font-style: italic">
                                                                             <b> &nbsp;✓&nbsp;</b>
                                                                         </p>
-
+                                                                        @*onclick="return colorChange(@item.ColorID);" *@
                                                                     </a>
                                                                 </li>
                                                             }
                                                             else
                                                             {
-                                                                <li title="@item.ColorName" class="@item.CssClass" id="lstColor_@i">
+                                                                <li title="@item.ColorName" class="@item.CssClass" id="lstColor_@i" style="display: inline-flex;margin-right: .4rem;margin-bottom: .4rem;">
                                                                     <a class="@item.Status" onclick="return colorChange(@i,@item.ColorID)" style="border: 1px solid black;cursor:pointer;height:35px;top:12px;padding-top: 5px;;width:35px;background-color: @item.ColorCode" @*onclick="return colorChange(@item.ColorID);" *@>
+                                                                        <p style="padding-left: 11px;padding-top: 5px;color: #541a24;font-size: 14px;font-style: italic">
+                                                                            <b> &nbsp;&nbsp;</b>
+                                                                        </p>
+
 
                                                                     </a>
                                                                 </li>

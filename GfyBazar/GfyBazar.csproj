@@ -254,7 +254,6 @@
     <Content Include="assets\images\hot-deals\p5.jpg" />
     <Content Include="assets\images\label.png" />
     <Content Include="assets\images\loading.gif" />
-    <Content Include="assets\images\logo.png" />
     <Content Include="assets\images\next.png" />
     <Content Include="assets\images\payments\1.png" />
     <Content Include="assets\images\payments\2.png" />
@@ -658,6 +657,19 @@
     <Content Include="images\success.gif" />
     <Content Include="images\VendorPic\180020201900Jellyfish.jpg" />
     <Content Include="images\VendorPic\180220201902Desert.jpg" />
+    <Content Include="main-assets\css\bootstrap.min.css" />
+    <Content Include="main-assets\css\fontawesome-all.min.css" />
+    <Content Include="main-assets\css\fxt-animation.css" />
+    <Content Include="main-assets\css\style.css" />
+    <Content Include="main-assets\js\bootstrap.min.js" />
+    <Content Include="main-assets\js\imagesloaded.pkgd.min.js" />
+    <Content Include="main-assets\js\jquery-3.5.0.min.js" />
+    <Content Include="main-assets\js\jquery.countdown.min.js" />
+    <Content Include="main-assets\js\main.js" />
+    <Content Include="main-assets\media\figure\maintenance-img.png" />
+    <Content Include="main-assets\webfonts\fa-brands-400.html" />
+    <Content Include="main-assets\webfonts\fa-regular-400.html" />
+    <Content Include="main-assets\webfonts\fa-solid-900.html" />
     <Content Include="PrimeCss\css\bootstrap.min.css" />
     <Content Include="PrimeCss\css\style.css" />
     <Content Include="PrimeCss\images\deals.png" />
@@ -696,6 +708,21 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="images\MainCategoryImage\07548534-faa2-41c1-bd37-eb1e36166736.pdf" />
+    <Content Include="main-assets\webfonts\fa-brands-400.eot" />
+    <Content Include="main-assets\webfonts\fa-brands-400.ttf" />
+    <Content Include="main-assets\webfonts\fa-brands-400.woff" />
+    <Content Include="main-assets\webfonts\fa-brands-400.woff2" />
+    <Content Include="main-assets\webfonts\fa-brands-400d41d.eot" />
+    <Content Include="main-assets\webfonts\fa-regular-400.eot" />
+    <Content Include="main-assets\webfonts\fa-regular-400.ttf" />
+    <Content Include="main-assets\webfonts\fa-regular-400.woff" />
+    <Content Include="main-assets\webfonts\fa-regular-400.woff2" />
+    <Content Include="main-assets\webfonts\fa-regular-400d41d.eot" />
+    <Content Include="main-assets\webfonts\fa-solid-900.eot" />
+    <Content Include="main-assets\webfonts\fa-solid-900.ttf" />
+    <Content Include="main-assets\webfonts\fa-solid-900.woff" />
+    <Content Include="main-assets\webfonts\fa-solid-900.woff2" />
+    <Content Include="main-assets\webfonts\fa-solid-900d41d.eot" />
     <None Include="Properties\PublishProfiles\DWPeShoppin.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\bootstrap.js" />
@@ -817,7 +844,9 @@
     <Content Include="VendorCss\lib\quill\quill.snow.css" />
     <Content Include="VendorCss\lib\select2\css\select2.min.css" />
     <Content Include="VendorCss\lib\select2\js\select2.full.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddProduct.aspx.cs">
@@ -1176,6 +1205,7 @@
     <Content Include="ServiceProvederLogo\idea.webp" />
     <Content Include="ServiceProvederLogo\tataskydth.webp" />
     <Content Include="ServiceProvederLogo\voda.webp" />
+    <Content Include="Views\Home\Maintenance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,257 @@
+﻿@model GfyBazar.Models.CustomerManagement
+
+@{
+    ViewBag.Title = "OrderReport";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<style>
+    #divload {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 9999;
+        background: url("../../images/cart-loading.gif") no-repeat center center rgba(0,0,0,0.25);
+    }
+
+    .errortext {
+        border: 1px solid red !important;
+    }
+</style>
+<div class="loader" id="divload"></div>
+@using (Html.BeginForm("OrderReport", "CustomerManagement", FormMethod.Post, new { @id = "form1" }))
+{
+    @Html.HiddenFor(m => m.OrderDetailsID)
+    if (TempData["OrderReport"] != null)
+    {
+        <div class="@TempData["Class"]">
+            @TempData["OrderReport"]
+        </div>
+    }
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Order Report</h4>
+            @*<ul class="nav nav-pills nav-pills-success" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/CustomerManagement/UpdateOrderStatus">Packed Order</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/CustomerManagement/ShipOrder">Ship Order</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Deliver Order</a>
+                    </li>
+                </ul>*@
+
+            <br />
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        Order No
+                        @Html.TextBoxFor(m => m.OrderNO, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        Customer Name
+                        @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        Product Name
+                        @Html.TextBoxFor(m => m.ProductName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        FromDate
+                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "Enter From Date", @readonly = "readonle" })
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        ToDate <span style="color: red">*</span>
+                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "Enter To Date", @readonly = "readonle" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <br />
+                        @*<a href="/CustomerManagement/OrderDetails?no=OrderNO" class="btn btn-primary btn-sm">View</a>*@
+                        <input class="btn btn-info btn-md" type="submit" value="Search" id="btnSearch" name="Search" />
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            @if (Model.CustomerName != null)
+            {
+                @*<div class="row ">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <b>CustomerName :</b>
+                                @Html.DisplayFor(m => m.CustomerName)
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <b>Order No.</b>
+                                @Html.DisplayFor(m => m.OrderNO)
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <b>Order Date :</b>
+                                @Html.DisplayFor(m => m.OrderDate)
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <b>Total Amount:</b>
+                                @Html.DisplayFor(m => m.TotalAmount)
+                            </div>
+                        </div>
+                    </div>*@
+                <br />
+                <div class="row">
+                    <div class="col-md-12" style="overflow-x:scroll;">
+                        <table id="datatable-buttons" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th hidden>PK_GalleryID</th>
+                                    @* <th><input type="checkbox" id="select-all" /></th>*@
+                                    <th>S No.</th>
+                                    <th>Customer Name</th>
+                                    <th>Contact</th>
+                                    <th>Address</th>
+                                    <th>Payment Mode</th>
+                                    <th>Product</th>
+                                    <th>Size</th>
+                                    <th>Unit</th>
+                                    <th>Quantity</th>
+                                    <th>Rate</th>
+                                    <th>Amount</th>
+                                    <th>Order Date</th>
+                                    <th>OrderStatus</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.List != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var Item in Model.List)
+                                        {
+                                            <tr class="text-left">
+                                                <td hidden>@Item.OrderDetailsID</td>
+                                                @*<td>
+                                                        <input type="checkbox" id="Chk_ @i" name="Chk_ @i" />
+
+                                                        <input type='hidden' value='@Item.OrderDetailsID' id='orderdetailid_ @i' name='orderdetailid_ @i'>
+                                                        <input type='hidden' value='@Item.OrderStatus' id='orderstatus_ @i' name='orderstatus_ @i'>
+                                                    </td>*@
+
+                                                <td>@i</td>
+                                                <td>@Item.CustomerName</td>
+                                                <td>@Item.Mobile</td>
+                                                <td>@Item.Address</td>
+                                                <td>@Item.PaymentMode</td>
+                                                <td>@Item.ProductName</td>
+                                                <td>@Item.SizeName</td>
+                                                <td>@Item.UnitName</td>
+                                                <td>@Item.Quantity</td>
+                                                <td>@Item.Rate</td>
+                                                <td>@Item.TotalAmount</td>
+                                                <td>@Item.OrderDate</td>
+                                                <td>@Item.OrderStatus</td>
+                                            </tr>
+                                            i++;
+                                        }
+                                        <input type='hidden' value='@i' id='hdrows' name='hdrows' />
+                                    }
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    @* <div class="col-md-4">
+                            <div class="form-group">
+                                Order Status  <span style="color: red">*</span>
+                                @Html.DropDownListFor(m => m.OrderStatus, new SelectList(ViewBag.ddlOrderStatus, "Value", "Text"), new { @class = "form-control" })
+                            </div>
+                        </div>*@
+                    @*<div class="col-md-4">
+                            <div class="form-group">
+                                <br />
+                                <input class="btn btn-success pull-left" type="submit" value="Update Status" id="btnGet" name="Update" onclick="return validateSave();" />
+                            </div>
+                        </div>*@
+                </div>
+            }
+            <br />
+        </div>
+    </div>
+
+
+
+
+}
+
+<script src="../../AdminCSS/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+
+    });
+    $('#select-all').click(function (event) {
+        if (this.checked) {
+            // Iterate each checkbox
+            $(':checkbox').each(function () {
+                this.checked = true;
+            });
+        } else {
+            $(':checkbox').each(function () {
+                this.checked = false;
+            });
+        }
+    });
+
+    function validateSave() {
+        $("#divload").css({ 'display': '' });
+
+        if (($("input[name*='Chk_']:checked").length) <= 0) {
+            alert("You must check at least 1 box");
+            $("#divload").css({ 'display': 'none' });
+            return false;
+
+        }
+        $("#divload").css({ 'display': '' });
+        return true;
+    }
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        maxDate: 0,
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true,
+        minDate: new Date(new Date().setMonth(new Date().getMonth() - 2))
+    });
+
+</script>
