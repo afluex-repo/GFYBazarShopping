@@ -254,7 +254,6 @@
     <Content Include="assets\images\hot-deals\p5.jpg" />
     <Content Include="assets\images\label.png" />
     <Content Include="assets\images\loading.gif" />
-    <Content Include="assets\images\logo.png" />
     <Content Include="assets\images\next.png" />
     <Content Include="assets\images\payments\1.png" />
     <Content Include="assets\images\payments\2.png" />
@@ -845,7 +844,9 @@
     <Content Include="VendorCss\lib\quill\quill.snow.css" />
     <Content Include="VendorCss\lib\select2\css\select2.min.css" />
     <Content Include="VendorCss\lib\select2\js\select2.full.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddProduct.aspx.cs">

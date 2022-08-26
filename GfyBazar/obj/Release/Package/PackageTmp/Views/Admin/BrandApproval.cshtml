@@ -1,0 +1,137 @@
+﻿@model GfyBazar.Models.Vendor
+
+@{
+    ViewBag.Title = "BrandApproval";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("BrandApproval", "Admin", FormMethod.Post, new { @id = "form1" }))
+{
+
+    <p style="color: red">
+        @TempData["BrandApproval"]
+    </p>
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Brand Request List</h4>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        Status
+                        @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.Status, "Value", "Text"), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        From Date
+                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @readonly = "readonly" })
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        To Date
+                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <br />
+                        <input class="btn btn-success" type="submit" value="Search" id="btnSearch" name="Search" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>SNo.</th>
+                                    <th>Request Date</th>
+                                    <th>Request Code</th>
+                                    <th>Vednor Name</th>
+                                    <th>Brand Name</th>
+                                    <th>Brand Logo</th>
+                                    <th>Website Link</th>
+                                    <th>Document Type</th>
+                                    <th>Document File</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lstRequests != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var Item in Model.lstRequests)
+                                        {
+                                            <tr class="text-left">
+                                                <td>@i</td>
+                                                <td>@Item.AddedOn</td>
+                                                <td>@Item.RequestCode</td>
+                                                <td>@Item.DisplayName</td>
+                                                <td>@Item.BrandName</td>
+                                                <td>@Item.BrandLogo</td>
+                                                <td>@Item.WebsiteLink</td>
+                                                <td>@Item.DocumentType</td>
+                                                <td>
+                                                    <img src="@Item.DocumentPath" height="150" width="150" />
+                                                </td>
+                                                <td>
+                                                    @if (Item.Status == "Pending")
+                                                    {
+                                                        <a href="/Admin/ApproveBrandrequest?rcode=@Item.RequestCode" onclick="return confirm('Are you sure you want to approve this Request?');" class="btn btn-info btn-sm">Approve</a>
+                                                    }
+                                                    else {
+                                                        <label class="label label-success">Approved</label>
+                                                    }
+                                                </td>
+                                            </tr>
+
+                                            i++;
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        $('#dataTables-example').DataTable({
+            responsive: true,
+
+        });
+    });
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true,
+
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+</script>
+
+
+

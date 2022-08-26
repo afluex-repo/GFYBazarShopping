@@ -2342,7 +2342,7 @@ namespace GfyBazar.Controllers
             //    model.Fk_vendorId = ds.Tables[8].Rows[0]["Fk_vendorId"].ToString();
 
             //}
-            DataSet dsImage = model.QuickView();
+            //DataSet dsImage = model.QuickView();
             if (ds.Tables.Count > 8)
             {
                 foreach (DataRow r in ds.Tables[8].Rows)
@@ -2364,6 +2364,15 @@ namespace GfyBazar.Controllers
             model.lstproductimages = lst;
 
             #region BindVendor
+            model.ProductID = Crypto.Decrypt(pid);
+            model.ColorID = string.IsNullOrEmpty(colorid) ? null : colorid;
+            model.SizeID = string.IsNullOrEmpty(sizeid) ? null : sizeid;
+            model.FlavorID = string.IsNullOrEmpty(flavorid) ? null : flavorid;
+            model.MaterialID = string.IsNullOrEmpty(materialid) ? null : materialid;
+            model.RamID = string.IsNullOrEmpty(ramid) ? null : ramid;
+            model.StorageID = string.IsNullOrEmpty(storageid) ? null : storageid;
+            model.StarRatingID = string.IsNullOrEmpty(starid) ? null : starid;
+            model.Landmark = string.IsNullOrEmpty(last) ? null : last;
             DataSet dsVendor = model.GetVendorForProduct();
             if (dsVendor != null && dsVendor.Tables[0].Rows.Count > 0)
             {
@@ -2399,7 +2408,10 @@ namespace GfyBazar.Controllers
             }
             #endregion
 
-            Session["PrimaryImage"] = dsVendor.Tables[2].Rows[0]["ImagePath"].ToString();
+            if (dsVendor != null && dsVendor.Tables[2].Rows.Count>0)
+            {
+                Session["PrimaryImage"] = dsVendor.Tables[2].Rows[0]["ImagePath"].ToString();
+            }
             ViewBag.Title = model.ProductName + ' ' + model.ShortDescription;
             #region Bind Seller review
             List<Customer> lstseller = new List<Customer>();

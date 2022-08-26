@@ -1,0 +1,148 @@
+﻿@model GfyBazar.Models.Master
+
+@{
+    ViewBag.Title = "Ram";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Ram", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    if (TempData["Ram"] != null)
+    {
+        <div class="@TempData["Class"]">
+            @TempData["Ram"]
+        </div>
+    }
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">RAM</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        RAM Name <span style="color: red">*</span>
+                        @Html.TextBoxFor(m => m.RAM, new { @class = "form-control", @Placeholder = "RAM Name", maxlength = "50" })
+                        @Html.HiddenFor(m => m.RamID, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input class="btn btn-success btn-sm" onclick="return validateform()" type="submit" value="Save" id="btnSave" name="btnSave" />
+                        <a href="#" class="btn btn-success btn-sm" onclick="return updateRam()" id="btnUpdate" style="display: none">Update</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <br />
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Ram List</h4>
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered dataTable no-footer">
+                            <thead>
+                                <tr>
+                                    <th>S No.</th>
+                                    <th>Ram Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lstRam != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var Item in Model.lstRam)
+                                        {
+                                            <tr class="text-left">
+                                                <td>@i</td>
+                                                <td>@Item.RAM</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-primary btn-sm" onclick="editRam('@Item.RAM','@Item.RamID')">Edit</a>
+                                                    <a href="/Master/DeleteRam/?RamID=@Item.RamID" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you wish to delete this RAM ?');">Delete</a>
+                                                </td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+
+<script src="../../AdminCSS/js/jquery.min.js"></script>
+
+<script>
+
+    function editRam(ram, ramid) {
+        $('#RAM').val(ram);
+        $('#RamID').val(ramid);
+        $('#btnSave').hide();
+        $('#btnUpdate').show();
+    }
+
+    function updateRam() {
+        $(".errortext").removeClass("errortext");
+        if ($('#RAM').val() == '') {
+            $("#RAM").addClass('errortext');
+            $('#RAM').focus();
+            return false;
+        }
+
+        $.ajax({
+            url: "/Master/UpdateRam",
+            Type: "Get",
+            DataType: "JSON",
+            data: { RamID: $("#RamID").val(), RAM: $("#RAM").val() },
+            success: function (data) {
+                alert(data.Result);
+                window.location.href = '@Url.Action("Ram", "Master")';
+            }
+
+        });
+    }
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#RAM').val() == '') {
+            $("#RAM").addClass('errortext');
+            $('#RAM').focus();
+            return false;
+        }
+        return true;
+    }
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#dataTables-example').DataTable({
+            responsive: true,
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ]
+        });
+    });
+</script>
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
