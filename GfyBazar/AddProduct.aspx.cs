@@ -526,7 +526,7 @@ namespace GfyBazar
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Attention", "window.alert('Please add Atleast one varient')", true);
                     return;
                 }
-                obj.BrandID = ddlbrand.SelectedValue;
+                 obj.BrandID = ddlbrand.SelectedValue;
                 obj.CategoryID = ddlcategory.SelectedValue;
                 obj.SubCategoryID = ddlsubcategory.SelectedValue;
                 obj.MainCategoryID = ddlmaincategory.SelectedValue;
@@ -592,6 +592,12 @@ namespace GfyBazar
                 obj.dtProductQuantity = dtst;
 
                 dtSecondaryImages = (DataTable)Session["dtSecImages"];
+                if (dtSecondaryImages.Rows.Count > 0)
+                {
+
+                    obj.PrimaryImage = dtSecondaryImages.Rows[0]["ImagePath"].ToString();
+
+                }
                 obj.dtProductImages = dtSecondaryImages;
                 if (Session["UserType"].ToString() == "Admin")
                 {

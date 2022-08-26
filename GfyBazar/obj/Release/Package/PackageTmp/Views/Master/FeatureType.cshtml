@@ -1,0 +1,167 @@
+﻿@model GfyBazar.Models.Master
+
+@{
+    ViewBag.Title = "FeatureType";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("FeatureType", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+
+    if (TempData["FeatureType"] != null)
+    {
+        <div class="@TempData["Class"]">
+            @TempData["FeatureType"]
+        </div>
+    }
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Feature Type</h4>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            Feature Type Name <span style="color: red">*</span>
+                        </label>
+                        @Html.TextBoxFor(m => m.FeatureTypeName, new { @class = "form-control", @Placeholder = "Feature Type Name" })
+                        @Html.HiddenFor(m => m.FeatureTypeId)
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            Feature Type Image <span style="color: red">*</span>
+                        </label>
+                        <input type="file" name="postedFile" id="Image" onchange="readURL(this)" />
+                        <img src="@Model.Images" id="ContentPlaceHolder1_imgProductImage" class="fileinput-preview thumbnail" style="width: 150px; height: 100px;" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input class="btn btn-success btn-sm" onclick="return validateform()" type="submit" value="Save" id="btnSave" name="btnSave" />
+                        <input class="btn btn-success btn-sm" onclick="return updatesubCategory()" type="submit" name="btnUpdate" id="btnUpdate" value="Update" style="display: none" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">FeatureType List</h4>
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered dataTable no-footer">
+                            <thead>
+                                <tr>
+                                    <th>S No.</th>
+
+                                    <th>Feature Type Name</th>
+                                    <th>Images</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lstSubCategory != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var Item in Model.lstSubCategory)
+                                        {
+                                            <tr class="text-left">
+
+                                                <td>@i</td>
+
+                                                <td>@Item.FeatureTypeName</td>
+                                                <td><img src="@Item.Images" id="img" height="100" width="100" /></td>
+                                                <td>
+                                                    <a href="#" class="btn btn-primary btn-sm" onclick="editSubCategory('@Item.FeatureTypeId','@Item.FeatureTypeName','@Item.Images')">Edit</a>
+                                                    <a href="/Master/DeleteFeatureType?id=@Item.FeatureTypeId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you wish to delete this ?');">Delete</a>
+                                                </td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="../../AdminCSS/js/jquery.min.js"></script>
+<script>
+
+    function editSubCategory(id,mname, img) {
+        debugger
+
+        $('#FeatureTypeName').val(mname);
+        $('#FeatureTypeId').val(id);
+        //$('#Images').val(img);
+        $('#ContentPlaceHolder1_imgProductImage').attr("src", img);
+        $('#btnSave').hide();
+        $('#btnUpdate').show();
+    }
+
+    function updatesubCategory() {
+
+        $(".errortext").removeClass("errortext");
+
+
+        if ($('#FeatureTypeName').val() == '') {
+            $("#FeatureTypeName").addClass('errortext');
+            $('#FeatureTypeName').focus();
+            return false;
+        }
+
+    }
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+
+        if ($('#FeatureTypeName').val() == '') {
+            $("#FeatureTypeName").addClass('errortext');
+            $('#FeatureTypeName').focus();
+            return false;
+        }
+        if ($('#Image').val() == '') {
+            $("#Image").addClass('errortext');
+            $('#Image').focus();
+            alert("Please select  image..!");
+            return false;
+        }
+        return true;
+    }
+
+
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ContentPlaceHolder1_imgProductImage')
+                    .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+

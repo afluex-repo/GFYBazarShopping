@@ -1,0 +1,171 @@
+﻿@model GfyBazar.Models.Master
+
+@{
+    ViewBag.Title = "Size";
+
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("SaveSize", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    if (TempData["Size"] != null)
+    {
+        <div class="@TempData["Class"]">
+            @TempData["Size"]
+        </div>
+    }
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Size</h4>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        Select Unit <span style="color: red">*</span>
+                        @Html.DropDownListFor(m => m.UnitID, new SelectList(ViewBag.ddlUnit, "Value", "Text"), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        Size Name <span style="color: red">*</span>
+                        @Html.TextBoxFor(m => m.SizeName, new { @class = "form-control", @Placeholder = "Size Name" })
+                        @Html.HiddenFor(m => m.SizeID)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input class="btn btn-success btn-sm" onclick="return validateform()" type="submit" value="Save" id="btnSave" />
+                        <a href="#" class="btn btn-success btn-sm" onclick="return updatesize()" id="btnUpdate" style="display: none">Update</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Size List</h4>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table id="example23" class="display nowrap table table-hover table-striped table-bordered dataTable no-footer">
+                                <thead>
+                                    <tr>
+
+                                        <th>S No.</th>
+                                        <th>Unit Name</th>
+                                        <th>Size Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstSubCategory != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstSubCategory)
+                                            {
+                                                <tr class="text-left">
+                                                 
+                                                    <td>@i</td>
+                                                    <td>@Item.UnitName</td>
+                                                    <td>@Item.SizeName</td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-primary btn-sm" onclick="editsize('@Item.UnitID','@Item.UnitName','@Item.SizeID','@Item.SizeName')">Edit</a>
+                                                        <a href="/Master/DeleteSize/@Item.SizeID" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you wish to delete this Size?');">Delete</a>
+                                                    </td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+
+
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+}
+
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+
+<script>
+
+
+
+    function editsize(unitid, unitname, sizeid, sizenm) {
+        debugger
+        $('#UnitID').val(unitid);
+        $('#UnitName').val(unitname);
+        $('#SizeID').val(sizeid);
+        $('#SizeName').val(sizenm);
+
+        $('#btnSave').hide();
+        $('#btnUpdate').show();
+    }
+
+    function updatesize() {
+        debugger
+        $(".errortext").removeClass("errortext");
+
+        if ($('#UnitID').val() == '0') {
+            $("#UnitID").addClass('errortext');
+            $('#UnitID').focus();
+            return false;
+        }
+        if ($('#SizeName').val() == '') {
+            $("#SizeName").addClass('errortext');
+            $('#SizeName').focus();
+            return false;
+        }
+
+        $.ajax({
+            url: "/Master/UpdateSize",
+            Type: "Get",
+            DataType: "JSON",
+            data: { UnitID: $("#UnitID").val(), SizeName: $("#SizeName").val(), SizeID: $("#SizeID").val() },
+            success: function (data) {
+                alert(data.Result);
+                window.location.href = '@Url.Action("Size", "Master")';
+            }
+
+        });
+    }
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#UnitID').val() == '0') {
+            $("#UnitID").addClass('errortext');
+            $('#UnitID').focus();
+            return false;
+        }
+        if ($('#SizeName').val() == '') {
+            $("#SizeName").addClass('errortext');
+            $('#SizeName').focus();
+            return false;
+        }
+
+        return true;
+    }
+
+</script>
+
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+
+
