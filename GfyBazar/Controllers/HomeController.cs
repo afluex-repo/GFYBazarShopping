@@ -128,15 +128,15 @@ namespace GfyBazar.Controllers
                             #region SendEmailForVerification
                             SmtpClient mailServer = new SmtpClient("smtp.gmail.com", 587);
                             mailServer.EnableSsl = true;
-                            mailServer.Credentials = new System.Net.NetworkCredential("dwpeforyou@gmail.com", "7985207220");
+                            mailServer.Credentials = new System.Net.NetworkCredential("grazieforyouventures@gmail.com", "7985207220");
 
                             string mobencrypt = Crypto.Encrypt(model.Mobile);
-                            string body = "<div style = 'width:100%;background:#fff;font-size:12px;font-family:Verdana,Geneva,sans-serif' ><table style = 'width:640px;border:none;font-size:12px;margin:0 auto' cellpadding = '0' cellspacing = '0'><tbody><tr><td><div style = 'background:#173d79;text-align:center;border-top-right-radius:5px;border-top-left-radius:5px;padding:15px 0'><div style = 'background:#173d79;text-align:center;border-top-right-radius:5px;border-top-left-radius:5px;padding:0px 0'><div><a><img style = 'width:180px' src = 'http://demo4.afluex.com/Websitecss/img/logo.png' ></a></div><h1 style = 'color:#fff;font-weight:normal'></h1></div></div></td></tr> "
+                            string body = "<div style = 'width:100%;background:#fff;font-size:12px;font-family:Verdana,Geneva,sans-serif' ><table style = 'width:640px;border:none;font-size:12px;margin:0 auto' cellpadding = '0' cellspacing = '0'><tbody><tr><td><div style = 'background:#173d79;text-align:center;border-top-right-radius:5px;border-top-left-radius:5px;padding:15px 0'><div style = 'background:#173d79;text-align:center;border-top-right-radius:5px;border-top-left-radius:5px;padding:0px 0'><div><a><img style = 'width:180px' src = '/Websitecss/img/logo.png' ></a></div><h1 style = 'color:#fff;font-weight:normal'></h1></div></div></td></tr> "
                             + "<tr><td><div style='background:#fff;vertical-align:top;padding:1px 0;border-bottom-right-radius:5px;border-bottom-left-radius:5px;border-left:1px solid #ddd;border-right:1px solid #ddd'><h4 style = 'font-size:14px;padding:10px 8px'>"
                             + "Dear " + model.DisplayName + ",<br/> Welcome to the seller club of Gfy Bazar.<br/>Please"
-                            + "<a href = 'http://demo4.afluex.com/Home/VerifyEmail?q=" + mobencrypt + "' target= '_blank'>Click Here</a> to verify your EmailId.</h4></div></td></tr><tr><td><div style = 'background:#173d79;text-align:center;border-top-right-radius:5px;border-top-left-radius:5px;padding:1px 0'>"
+                            + "<a href = '/Home/VerifyEmail?q=" + mobencrypt + "' target= '_blank'>Click Here</a> to verify your EmailId.</h4></div></td></tr><tr><td><div style = 'background:#173d79;text-align:center;border-top-right-radius:5px;border-top-left-radius:5px;padding:1px 0'>"
                             + "<div style= 'background:#173d79;text-align:center;border-top-right-radius:5px;border-top-left-radius:5px;padding:0px 0'><div></div><h1 style= 'color:#fff;font-weight:normal'> Gfy Bazar</h1>"
-                            + "<h4 style = 'color:#fff;font-weight:normal'> 'Shopping and Income at one place' </h4><h4 style = 'color:white'><i class='fa fa-volume-control-phone' aria-hidden='true'></i> &nbsp; Phone No : <i>+91 7985207220</i><i class='fa fa-envelope-o' aria-hidden='true'></i>&nbsp; Email : <i> dwpeforyou@gmail.com</i></h4>"
+                            + "<h4 style = 'color:#fff;font-weight:normal'> 'Shopping and Income at one place' </h4><h4 style = 'color:white'><i class='fa fa-volume-control-phone' aria-hidden='true'></i> &nbsp; Phone No : <i>+91 7985207220</i><i class='fa fa-envelope-o' aria-hidden='true'></i>&nbsp; Email : <i> grazieforyouventures@gmail.com</i></h4>"
                             + "<h4 style = 'color:white'><i class='fa fa-volume-control-phone' aria-hidden='true'></i> &nbsp; Website : <i>http://www.GfyBazar.com/</i></h4>"
                             + "</div></div></td></tr><tr><td><p style='color:#888;font-size:11px;margin-bottom:20px'>© Copyright 2019 All Rights Reserved</p></td></tr></tbody></table></div>";
 
@@ -144,7 +144,7 @@ namespace GfyBazar.Controllers
                             myMail.Subject = "Verification Email from Gfy Bazar";
                             myMail.Body = body;
                             myMail.IsBodyHtml = true;
-                            myMail.From = new MailAddress("dwpeforyou@gmail.com", "DW Shopping");
+                            myMail.From = new MailAddress("grazieforyouventures@gmail.com", "GFY Bazar");
                             myMail.To.Add(model.Email);
 
                             mailServer.Send(myMail);
@@ -932,6 +932,11 @@ namespace GfyBazar.Controllers
             return View();
         }
         public ActionResult Specials()
+        {
+            return View();
+        }
+
+        public ActionResult Maintenance()
         {
             return View();
         }

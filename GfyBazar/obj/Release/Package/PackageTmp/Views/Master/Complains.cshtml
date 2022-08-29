@@ -1,0 +1,135 @@
+﻿@model GfyBazar.Models.Customer
+
+@{
+    ViewBag.Title = "Complains";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <div class="page-header-content header-elements-md-inline">
+        <div class="page-title d-flex">
+            <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Complains</span> -  Complain List</h4>
+            <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+        </div>
+    </div>
+</div>
+<!-- /page header -->
+@using (Html.BeginForm("Complains", "Master", FormMethod.Post, new { @id = "form1" }))
+{
+
+    <div class="content">
+        <div class="card">
+            <div class="card-title">
+                <p style="color:red; font-size:large; margin-left:3%; margin-top:1%">
+                    @TempData["BlockAssociate"]
+                </p>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        @Html.TextBoxFor(m => m.Contact, new { @class = "form-control", @placeholder = "Contact" })
+                    </div>
+                    <div class="col-md-3 form-group">
+                        @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control", @placeholder = "Customer Name" })
+                    </div>
+                    <div class="col-md-3 form-group">
+                        @Html.TextBoxFor(m => m.ComplainStatus1, new { @class = "form-control", @placeholder = "Status" })
+                    </div>
+                    <div class="col-md-3 form-group">
+                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @placeholder = "From Date" })
+                    </div>
+                    <div class="col-md-3 form-group">
+                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @placeholder = "To Date" })
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <input type="submit" name="GetDetails" class="btn btn-info" value="Get Details" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12">
+                <!-- Marketing campaigns -->
+                <div class="card">
+                    <div class="card-header header-elements-sm-inline">
+                        <h6 class="card-title">Complains List</h6>
+                    </div>
+                    @if (Model != null)
+                    {
+                        if (Model.lstComplains != null)
+                        {
+                            <div class="table-responsive">
+                                <table class="table text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr No.</th>
+                                            <th>Date</th>
+                                            <th>Complains Number</th>
+                                            <th>Name</th>
+                                            <th>Issue</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+                                            if (Model.lstComplains != null)
+                                            {
+                                                int i = 1;
+                                                foreach (var Item in Model.lstComplains)
+                                                {
+                                                    <tr class="text-left">
+                                                        <td>@i</td>
+                                                        <td>@Item.ComplainDate</td>
+                                                        <td>@Item.ComplainID</td>
+                                                        <td>@Item.DisplayName</td>
+                                                        <td>@Item.Issue</td>
+                                                        <td>@Item.ComplainStatus1</td>
+                                                        <td>
+                                                            <a href="/Master/ComplainReply?id=@Item.EncrptNo" class="btn btn-sm btn-primary"><i></i>View</a>
+                                                        </td>
+                                                    </tr>
+                                                    i++;
+                                                }
+
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>
+                            No Complains yet..
+                        </p>
+                    }
+                </div>
+                <!-- /marketing campaigns -->
+            </div>
+        </div>
+    </div>
+}
+ 
+
+<script src="../../AdminCSS/js/jquery.min.js"></script>
+<script>
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true,
+
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+</script>
+
+

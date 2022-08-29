@@ -1,0 +1,154 @@
+﻿@model GfyBazar.Models.Master
+
+@{
+    ViewBag.Title = "Flavor";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+ 
+@using (Html.BeginForm("SaveFlavor", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Flavour</h4>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Flavor <span style="color: red">*</span></label>
+                        @Html.TextBoxFor(m => m.FlavorName, new { @class = "form-control", @Placeholder = "Flavor", maxlength = "50" })
+                        @Html.HiddenFor(m => m.FlavorID, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <br/>
+                    <div class="form-group">
+                        <input class="btn btn-success btn-sm" onclick="return validateform()" type="submit" value="Save" id="btnSave" />
+                        <a href="#" class="btn btn-success btn-sm" onclick="return updateFlavor()" id="btnUpdate" style="display: none">Update</a>
+                    </div>
+
+                    <p style="color: @TempData["Flavor"]">
+
+                    </p>
+
+                </div>
+            </div>
+
+          
+        </div>
+    </div>
+    <br />
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Flavour List</h4>
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered dataTable no-footer">
+                            <thead>
+                                <tr>
+                                    <th>S No.</th>
+                                    <th>Flavor</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lstCategory != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var Item in Model.lstCategory)
+                                        {
+                                            <tr class="text-left">
+                                                <td>@i</td>
+                                                <td>@Item.FlavorName</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-primary btn-sm" onclick="editFlavor('@Item.FlavorName','@Item.FlavorID')">Edit</a>
+                                                    <a href="/Master/DeleteFlavor/@Item.FlavorID" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you wish to delete this ?');">Delete</a>
+                                                </td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                }
+                            </tbody>
+
+
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+
+<script>
+
+    function editFlavor(flavorName, flavorID) {
+        $('#FlavorName').val(flavorName);
+        $('#FlavorID').val(flavorID);
+        $('#btnSave').hide();
+        $('#btnUpdate').show();
+    }
+
+    function updateFlavor() {
+        $(".errortext").removeClass("errortext");
+        if ($('#FlavorName').val() == '') {
+            $("#FlavorName").addClass('errortext');
+            $('#FlavorName').focus();
+            return false;
+        }
+
+        $.ajax({
+            url: "/Master/UpdateFlavor",
+            Type: "Get",
+            DataType: "JSON",
+            data: { FlavorID: $("#FlavorID").val(), FlavorName: $("#FlavorName").val() },
+            success: function (data) {
+                alert(data.Result);
+                window.location.href = '@Url.Action("Flavor", "Master")';
+            }
+
+        });
+    }
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#FlavorName').val() == '') {
+            $("#FlavorName").addClass('errortext');
+            $('#FlavorName').focus();
+            return false;
+        }
+
+        return true;
+    }
+
+</script>
+
+@*<script>
+    $(document).ready(function () {
+        $('#dataTables-example').DataTable({
+            responsive: true,
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ]
+        });
+    });
+</script>*@
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>

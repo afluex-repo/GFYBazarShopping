@@ -1,0 +1,137 @@
+﻿@model GfyBazar.Models.CustomerManagement
+@{
+    ViewBag.Title = "CustomerOrders";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("CustomerOrders", "CustomerManagement", FormMethod.Post, new { @id = "form1" }))
+{
+    if (TempData["Offer"] != null)
+    {
+        <div class="@TempData["Class"]">
+            @TempData["Offer"]
+        </div>
+    }
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Customer Orders</h4>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        Customer Name
+                        @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control", @Placeholder = "Customer Name" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        Order No
+                        @Html.TextBoxFor(m => m.OrderNO, new { @class = "form-control", @Placeholder = "Order No" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        From Date
+                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @readonly = "readonly" })
+                        @Html.HiddenFor(m => m.OrderID)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        To Date
+                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = "readonly" })
+
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input class="btn btn-info btn-md pull-right" type="submit" value="Search" id="btnSearch" name="Search" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="card">
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered dataTable no-footer">
+                            <thead>
+                                <tr>
+                                    <th>S No.</th>
+                                    <th>OrderDate</th>
+                                    <th>Order No.</th>
+                                    <th>CustomerName</th>
+                                    <th>Mobile No</th>
+                                    <th>TotalAmount</th>
+                                    <th>Payment Mode</th>
+                                    <th>Address</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.List != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var Item in Model.List)
+                                        {
+                                            <tr class="text-left">
+
+                                                <td>@i</td>
+                                                <td>@Item.OrderDate</td>
+                                                <td>@Item.OrderNO</td>
+                                                <td>@Item.CustomerName</td>
+                                                <td>@Item.Mobile</td>
+                                                <td>@Item.TotalAmount</td>
+                                                <td>@Item.PaymentMode</td>
+                                                <td>@Item.Address</td>
+                                                <td>
+                                                    <a href="/CustomerManagement/Details?id=@Item.OrderID" class="btn btn-primary btn-sm" target="_blank">View</a>
+                                                </td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+}
+
+<script src="../../AdminCSS/js/jquery.min.js"></script>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script>
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        maxDate: 0,
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true,
+        minDate: new Date(new Date().setMonth(new Date().getMonth() - 2))
+    });
+
+</script>
+
+

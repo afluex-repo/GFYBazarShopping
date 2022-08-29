@@ -1,0 +1,104 @@
+﻿@model GfyBazar.Models.Customer
+
+@{
+    ViewBag.Title = "MyAccount";
+    Layout = "~/Views/Shared/CustomerLayout.cshtml";
+}
+
+@using (Html.BeginForm("MyAccount", "Customer", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+
+
+    <div class="breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-inner">
+                <ul class="list-inline list-unstyled">
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                    <li><a href="#">Account Information</a></li>
+                </ul>
+            </div><!-- /.breadcrumb-inner -->
+        </div><!-- /.container -->
+    </div>
+
+    <main class="main">
+        <div class="sign-in-page spaceacc">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 order-lg-last dashboard-content sign-in">
+                        <h4 class=""> Account Information</h4>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group required-field">
+                                            <label for="acc-name">First Name</label>
+
+                                            @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control"  ,@readonly="read" })
+                                            @Html.HiddenFor(m => m.CustomerID)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group required-field">
+                                            <label for="acc-mname">Contact</label>
+                                            @Html.TextBoxFor(m => m.Contact, new { @class = "form-control", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "10", @readonly = "read" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group required-field">
+                                            <label for="acc-mname">Email</label>
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @readonly = "read" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    @{Html.RenderAction("CustomerLeftMenu", "Customer", new { area = "" });}
+                </div>
+            </div>
+        </div>
+        <div class="mb-5"></div>
+    </main>
+                        }
+
+
+
+<script src="../../AdminCSS/js/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#CustomerName').val() == '') {
+            $("#CustomerName").addClass('errortext');
+            $('#CustomerName').focus();
+            return false;
+        }
+        if ($('#Contact').val() == '') {
+            $("#Contact").addClass('errortext');
+            $('#Contact').focus();
+            return false;
+        }
+        if ($('#Email').val() == '') {
+            $("#Email").addClass('errortext');
+            $('#Email').focus();
+            return false;
+        }
+
+        $("#divload").css({ 'display': '' });
+        return true;
+    }
+</script>

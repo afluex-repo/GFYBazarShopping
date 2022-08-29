@@ -26,12 +26,12 @@
                             <tr>
                                 <th>Image</th>
                                 <th>Product</th>
-                                <th>Price</th>
+                                <th>Price (Rs.)</th>
                                 <th>Qty</th>
 
-                                <th>Delivery Charge</th>
+                                <th>Delivery Charge (Rs.)</th>
 
-                                <th>Final Amt</th>
+                                <th>Final Amt (Rs.)</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -47,7 +47,7 @@
                                         <tr>
                                             <td>
                                                 <a href="#" class="product-image">
-                                                    <img src="http://demo4.afluex.com/@Item.PrimaryImage" style="width:50px;height:50px" alt="product">
+                                                    <img src="/@Item.PrimaryImage" style="width:50px;height:50px" alt="product">
                                                 </a>
                                             </td>
                                             <td>
@@ -67,7 +67,7 @@
 
                                             </td>
                                             <td>
-                                                @Item.MRP
+                                                <i class="fa fa-rupee"></i> @Item.MRP
                                                 <input type="hidden" id="txt_@i" name="txt_@i" />
                                                 <input type="hidden" value="@Item.SoldOutCss" id="txtsod_@i" name="txtsod_@i" />
                                                 <input type="hidden" value="@Item.Fk_vendorId" id="txtvendorId_@i" name="txtvendorId_@i" />
@@ -80,11 +80,11 @@
                                             </td>
 
                                             <td>
-                                                <span id="spDel_@i">@Item.DeliveryCharge</span>
+                                                <i class="fa fa-rupee"></i> <span id="spDel_@i">@Item.DeliveryCharge</span>
                                             </td>
 
                                             <td>
-                                                <span id="subtotal_@i">@Item.FinalAmount</span>
+                                                <i class="fa fa-rupee"></i>  <span id="subtotal_@i">@Item.FinalAmount</span>
                                                 <span id="spTotalDelivery_@i"></span>
                                                 <span id="spTotalIndividual_@i"></span>
                                             </td>
@@ -218,16 +218,16 @@
                                         <input type="radio" name="paymentMode" id="paymentMode" value="2" checked="checked" onchange="return CheckWallet('2');">
                                     }
                                 </td>
-                                <td><strong>DW Pe Wallet Balance</strong></td>
+                                <td><strong>GFY Wallet Balance</strong></td>
                                 <td> Rs. <span id="customerwallet">@ViewBag.CustomerWallet</span></td>
                                 <td>Express Delivery</td>
                                 <input type="hidden" id="modeofpaymnt" />
                             </tr>
 
-                            <tr>
+                            @*<tr>
 
-                                <td colspan="4"><a href="#" data-toggle="modal" data-target="#Moneymodal">Add Money In Dwpe Wallet</a></td>
-                            </tr>
+                                <td colspan="4"><a href="#" data-toggle="modal" data-target="#Moneymodal">Add Money In GFY Wallet</a></td>
+                            </tr>*@
                         </tbody>
                     </table>
 
@@ -264,7 +264,7 @@
                             else
                             {
                                 <tr id="becomeprimenote" style="display:none">
-                                    <td colspan="2" style="color:red"><b>Minimum Purchase of Rs2000/- Self Choice Products From Gfy Bazar and become a PRIME MEMBER in DWPE app</b></td>
+                                    <td colspan="2" style="color:red"><b>Minimum Purchase of Rs2000/- Self Choice Products From Gfy Bazar and become a PRIME MEMBER in GFY app</b></td>
 
                                 </tr>
                                 <tr id="becomeprime" style="display:none">
@@ -351,7 +351,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="width:70%">
             <div class="modal-header">
-                <h5 class="modal-title">Add Money In Dwpe Wallet</h5>
+                <h5 class="modal-title">Add Money In GFY  Wallet</h5>
 
             </div>
             <div class="modal-body">
@@ -636,7 +636,7 @@
         ////if( $('#IsBecomePrime').val()=="1")
         ////{
         ////    if(Number($('#finalamt').text())<1000){
-        ////        alert('Minimum Purchase of Rs2000/- Self Choice Products From DW Shopping and become a PRIME MEMBER in DWPE app');
+        ////        alert('Minimum Purchase of Rs2000/- Self Choice Products From GFY Bazar and become a PRIME MEMBER in DWPE app');
         ////        return false;
         ////    }
         ////}
@@ -661,7 +661,7 @@
         ////if( $('#IsBecomePrime').val()=="1")
         ////{
         ////    if(Number($('#finalamt').text())<1000){
-        ////        alert('Minimum Purchase of Rs2000/- Self Choice Products From DW Shopping and become a PRIME MEMBER in DWPE app');
+        ////        alert('Minimum Purchase of Rs2000/- Self Choice Products From GFY Bazar and become a PRIME MEMBER in DWPE app');
         ////        return false;
         ////    }
         ////}
@@ -836,7 +836,7 @@
         //if( $('#IsBecomePrime').val()=="1")
         //{
         //    if(Number($('#finalamt').text())<1000){
-        //        alert('Minimum Purchase of Rs2000/- Self Choice Products From DW Shopping and become a PRIME MEMBER in DWPE app');
+        //        alert('Minimum Purchase of Rs2000/- Self Choice Products From GFY Bazar and become a PRIME MEMBER in DWPE app');
         //        return false;
         //    }
         //}

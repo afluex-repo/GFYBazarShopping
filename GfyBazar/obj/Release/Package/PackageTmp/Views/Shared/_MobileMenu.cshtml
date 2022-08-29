@@ -1,0 +1,64 @@
+﻿@model GfyBazar.Models.Customer
+<style>
+    .yamm .dropdown-menu li a {
+        padding: 1px 0px !important;
+    }
+</style>
+<div class="nav-outer">
+    <ul class="nav navbar-nav">
+        <li class="active dropdown yamm-fw"> <a href="/Home/Index">Home</a> </li>
+        @if (Model != null)
+        {
+            if (Model.lstMainCategory != null)
+            {
+                var i = 0;
+                foreach (var item in Model.lstMainCategory)
+                {
+                    
+                    <li class="dropdown yamm mega-menu">
+                        <a style="font-size: 11px;" href="#" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">@item.MainCategoryName</a>
+                        <ul class="dropdown-menu container">
+                            <li>
+                                <div class="yamm-content ">
+                                    <div class="row">
+                                        @foreach (var item1 in Model.lstCategory)
+                                        {
+                                            if (item1.MainCategoryID == item.MainCategoryID)
+                                            {
+                                                <div class="col-lg-4">
+                                                    <div class="menu-title">
+                                                        <a href="/Customer/ProductList?id=@item1.CategoryID&Status=Category&f=menu" onclick="return openloader();"><b>@item1.CategoryName</b></a>
+                                                    </div>
+                                                    <ul>
+                                                        @foreach (var item2 in Model.lstSubCategory)
+                                                        {
+                                                            if (item2.CategoryID == item1.CategoryID)
+                                                            {
+                                                                <li><a onclick="return openloader();" href="/Customer/ProductList?id=@item2.SubCategoryID&Status=Sub Category&f=menu">@item2.SubCategoryName</a></li>
+                                                            }
+                                                        }
+
+                                                    </ul>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+
+
+                                </div>
+
+
+
+                            </li>
+                        </ul>
+
+
+
+                    </li>
+
+                }
+                i++;
+            }
+        }
+    </ul>
+</div>
