@@ -321,30 +321,32 @@ namespace GfyBazar.Controllers
             
             try
             {
-                string path = Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
-                if (postedFile != null)
-                {
-                    obj.Images = "../images/MainCategoryImage/" + path;
-                    postedFile.SaveAs(Path.Combine(Server.MapPath(obj.Images)));
-                   
+                
                     
-                }
+                    if (postedFile != null)
+                    {
+
+                     string path = Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
+                     obj.Images = "../images/MainCategoryImage/" + path;
+                        postedFile.SaveAs(Path.Combine(Server.MapPath(obj.Images)));
+                    }
+                    obj.UpdatedBy = Session["Pk_AdminId"].ToString();
+
+                    DataSet ds = obj.UpdateMainCategory();
+
+                    if (ds != null && ds.Tables.Count > 0)
+                    {
+                        if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                        {
+                            obj.Result = "Main Category updated successfully";
+                        }
+                        else
+                        {
+                            obj.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        }
+                    }
+              
                
-                obj.UpdatedBy = Session["Pk_AdminId"].ToString();
-
-                DataSet ds = obj.UpdateMainCategory();
-
-                if (ds != null && ds.Tables.Count > 0)
-                {
-                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
-                    {
-                        obj.Result = "Main Category updated successfully";
-                    }
-                    else
-                    {
-                        obj.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                    }
-                }
             }
             catch (Exception ex)
             {
@@ -3226,27 +3228,29 @@ namespace GfyBazar.Controllers
             try
             {
              
-                string mainfilename = DateTime.Now.ToString("ddMMyyyyHHmmsss") + MainImage.FileName;
-                string mainImagepath = Guid.NewGuid() + Path.GetExtension(MainImage.FileName);
-                Stream mainstrm = MainImage.InputStream;
-                var mainimage = System.Drawing.Image.FromStream(mainstrm);
                 if (MainImage != null)
                 {
-                    #region 400
-                    int mainnewWidth = Convert.ToInt32(400);
-                    int mainnewHeight = Convert.ToInt32(400);
+                    string mainfilename = DateTime.Now.ToString("ddMMyyyyHHmmsss") + MainImage.FileName;
+                    string mainImagepath = Guid.NewGuid() + Path.GetExtension(MainImage.FileName);
+                    Stream mainstrm = MainImage.InputStream;
+                    using (var mainimage = System.Drawing.Image.FromStream(mainstrm)) 
+                    {
+                        #region 400
+                        int mainnewWidth = Convert.ToInt32(400);
+                        int mainnewHeight = Convert.ToInt32(400);
 
-                    var mainthumbImg = new SD.Bitmap(mainnewWidth, mainnewHeight);
-                    var thumbGraph = SD.Graphics.FromImage(mainthumbImg);
-                    thumbGraph.CompositingQuality = CompositingQuality.HighQuality;
-                    thumbGraph.SmoothingMode = SmoothingMode.HighQuality;
-                    thumbGraph.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    var mainimgRectangle = new SD.Rectangle(0, 0, mainnewWidth, mainnewHeight);
-                    thumbGraph.DrawImage(mainimage, mainimgRectangle);
-                    string maintargetPath = Server.MapPath("~/Images/ProdPrimaryImage/") + mainfilename;
-                    mainthumbImg.Save(maintargetPath, mainimage.RawFormat);
-                    obj.Images= "../../Images/ProdPrimaryImage/" + mainfilename;
-                    #endregion 225
+                        var mainthumbImg = new SD.Bitmap(mainnewWidth, mainnewHeight);
+                        var thumbGraph = SD.Graphics.FromImage(mainthumbImg);
+                        thumbGraph.CompositingQuality = CompositingQuality.HighQuality;
+                        thumbGraph.SmoothingMode = SmoothingMode.HighQuality;
+                        thumbGraph.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        var mainimgRectangle = new SD.Rectangle(0, 0, mainnewWidth, mainnewHeight);
+                        thumbGraph.DrawImage(mainimage, mainimgRectangle);
+                        string maintargetPath = Server.MapPath("~/Images/ProdPrimaryImage/") + mainfilename;
+                        mainthumbImg.Save(maintargetPath, mainimage.RawFormat);
+                        obj.Images = "../../Images/ProdPrimaryImage/" + mainfilename;
+                        #endregion 225
+                    }
 
                 }
                 if (postedFile != null)
