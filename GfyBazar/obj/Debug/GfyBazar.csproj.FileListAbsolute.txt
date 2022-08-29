@@ -264,7 +264,6 @@ F:\SachinMishraProject\repository\GFYBazarShopping\GfyBazar\bin\Newtonsoft.Json.
 F:\SachinMishraProject\repository\GFYBazarShopping\GfyBazar\bin\System.Net.Http.Formatting.xml
 F:\SachinMishraProject\repository\GFYBazarShopping\GfyBazar\bin\System.Web.Http.xml
 F:\SachinMishraProject\repository\GFYBazarShopping\GfyBazar\bin\System.Web.Http.WebHost.xml
-F:\SachinMishraProject\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.csprojResolveAssemblyReference.cache
 F:\SachinMishraProject\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.dll
 F:\SachinMishraProject\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.pdb
 F:\Ashwani Afluex\repository\GFYBazarShopping\GfyBazar\bin\ApplicationInsights.config
