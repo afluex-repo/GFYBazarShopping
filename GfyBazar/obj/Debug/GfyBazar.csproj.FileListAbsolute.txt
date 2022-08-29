@@ -155,7 +155,6 @@ E:\Repository\GFYBazarShopping\GfyBazar\bin\Newtonsoft.Json.xml
 E:\Repository\GFYBazarShopping\GfyBazar\bin\System.Net.Http.Formatting.xml
 E:\Repository\GFYBazarShopping\GfyBazar\bin\System.Web.Http.xml
 E:\Repository\GFYBazarShopping\GfyBazar\bin\System.Web.Http.WebHost.xml
-E:\Repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.csprojResolveAssemblyReference.cache
 E:\Repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.dll
 E:\Repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.pdb
 E:\Repository-Projects\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.csprojResolveAssemblyReference.cache
@@ -320,3 +319,4 @@ F:\Ashwani Afluex\repository\GFYBazarShopping\GfyBazar\bin\System.Web.Http.WebHo
 F:\Ashwani Afluex\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.dll
 F:\Ashwani Afluex\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.pdb
 F:\Ashwani Afluex\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.csprojResolveAssemblyReference.cache
+E:\Repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.csprojResolveAssemblyReference.cache
