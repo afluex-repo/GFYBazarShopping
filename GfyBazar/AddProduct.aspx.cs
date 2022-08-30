@@ -197,7 +197,7 @@ namespace GfyBazar
                         }
                         dr["FK_StarratingID"] = 0;
                         dr["StarRatingName"] = "N/A";
-                        dr["shoppingpointredemperc"] = string.IsNullOrEmpty(txtshoppingpointredemperc.Text)?"0":txtshoppingpointredemperc.Text;
+                        dr["shoppingpointredemperc"] = string.IsNullOrEmpty(txtshoppingpointredemperc.Text) ? "0" : txtshoppingpointredemperc.Text;
 
                         dt.Rows.Add(dr);
                         Session["tmpData"] = dt;
@@ -526,7 +526,7 @@ namespace GfyBazar
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Attention", "window.alert('Please add Atleast one varient')", true);
                     return;
                 }
-                 obj.BrandID = ddlbrand.SelectedValue;
+                obj.BrandID = ddlbrand.SelectedValue;
                 obj.CategoryID = ddlcategory.SelectedValue;
                 obj.SubCategoryID = ddlsubcategory.SelectedValue;
                 obj.MainCategoryID = ddlmaincategory.SelectedValue;
@@ -591,14 +591,33 @@ namespace GfyBazar
                 }
                 obj.dtProductQuantity = dtst;
 
+
+                //dtSecondaryImages = (DataTable)Session["dtSecImages"];
+                //if (dtSecondaryImages.Rows.Count > 0)
+                //{
+
+                //    obj.PrimaryImage = dtSecondaryImages.Rows[0]["ImagePath"].ToString();
+
+                //}
+                //obj.dtProductImages = dtSecondaryImages;
+
+            
                 dtSecondaryImages = (DataTable)Session["dtSecImages"];
-                if (dtSecondaryImages.Rows.Count > 0)
+                if (dtSecondaryImages == null)
                 {
-
-                    obj.PrimaryImage = dtSecondaryImages.Rows[0]["ImagePath"].ToString();
-
+                    obj.PrimaryImage = null;
+                    obj.dtProductImages = dtSecondaryImages;
                 }
-                obj.dtProductImages = dtSecondaryImages;
+                else
+                {
+                    dtSecondaryImages = (DataTable)Session["dtSecImages"];
+                    if (dtSecondaryImages.Rows.Count > 0)
+                    {
+                        obj.PrimaryImage = dtSecondaryImages.Rows[0]["ImagePath"].ToString();
+                    }
+                    obj.dtProductImages = dtSecondaryImages;
+                }
+               
                 if (Session["UserType"].ToString() == "Admin")
                 {
                     obj.IsApproved = "1";
@@ -615,7 +634,7 @@ namespace GfyBazar
 
                         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Attention", "window.alert('Product Added Successfully')", true);
 
-                       // ddlcolor.SelectedIndex = 0;
+                        // ddlcolor.SelectedIndex = 0;
                         ddlmaincategory.SelectedIndex = 0;
                         ddlcategory.SelectedIndex = 0;
                         ddlsubcategory.SelectedIndex = 0;
