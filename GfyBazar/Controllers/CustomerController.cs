@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Data;
 using GfyBazar.Models;
 using GfyBazar.Filter;
-using ShoppingPortal.Models;
 using Newtonsoft.Json;
-using System.Text;
 using GfyBazar.Models.RazpayModels;
 using System.Net;
 using Razorpay.Api;
 using static GfyBazar.Models.Common;
+using System.Runtime.Serialization.Json;
+using System.IO;
 
 namespace GfyBazar.Controllers
 {
@@ -2870,7 +2868,6 @@ namespace GfyBazar.Controllers
                 obj.TransactionType = "Wallet Web";
                 obj.Type = "Card";
                 DataSet ds = obj.SaveOrderDetails();
-            
                 Session["OrderId"] = order["id"].ToString();
                 Session["Amount"] = obj.amount;
 
@@ -2886,7 +2883,6 @@ namespace GfyBazar.Controllers
           
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-
         public static HttpWebRequest GetCreateOrderURL()
         {
             var url = PaymentGateWayDetails.CreateOrder;
@@ -2896,6 +2892,111 @@ namespace GfyBazar.Controllers
             webRequest.Method = "POST";
             return webRequest;
         }
+        //#region FetchPaymentByOrder
+        //public ActionResult FetchPaymentByOrder(string amount)
+        //{
+        //    CreateOrder objApiResponse = new CreateOrder();
+        //    CreateOrder obj = new CreateOrder();
+        //    string dcdata = Crypto.DecryptString(PaymentGateWayDetails.KeyName, model.Body);
+        //    obj = JsonConvert.DeserializeObject<CreateOrder>(dcdata);
+        //    FetchPaymentByOrderResponse obj1 = new FetchPaymentByOrderResponse();
+        //    string random = Common.GenerateRandom();
+        //    try
+        //    {
+        //        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+        //        RazorpayClient client = new RazorpayClient(PaymentGateWayDetails.KeyName, PaymentGateWayDetails.SecretKey);
+
+        //        List<Razorpay.Api.Payment> orderdetails = client.Order.Payments(obj.OrderId);
+        //        if (orderdetails.Count > 0)
+        //        {
+        //            for (int i = 0; i <= orderdetails.Count - 1; i++)
+        //            {
+        //                dynamic rr = orderdetails[i].Attributes;
+        //                obj1.PaymentId = rr["id"];
+        //                obj1.entity = rr["entity"];
+        //                obj1.amount = rr["amount"];
+        //                obj1.currency = rr["currency"];
+        //                obj1.status = rr["status"];
+        //                obj1.OrderId = rr["order_id"];
+        //                obj1.invoice_id = rr["invoice_id"];
+        //                obj1.international = rr["international"];
+        //                obj1.method = rr["method"];
+        //                obj1.amount_refunded = rr["amount_refunded"];
+        //                obj1.refund_status = rr["refund_status"];
+        //                obj1.captured = rr["captured"];
+        //                obj1.description = rr["description"];
+        //                obj1.card_id = rr["card_id"];
+        //                obj1.bank = rr["bank"];
+        //                obj1.wallet = rr["wallet"];
+        //                obj1.vpa = rr["vpa"];
+        //                obj1.email = rr["email"];
+        //                obj1.contact = rr["contact"];
+        //                obj1.fee = rr["fee"];
+        //                obj1.tax = rr["tax"];
+        //                obj1.error_code = rr["error_code"];
+        //                obj1.error_description = rr["error_description"];
+        //                obj1.error_source = rr["error_source"];
+        //                obj1.error_step = rr["error_step"];
+        //                obj1.error_reason = rr["error_reason"];
+        //                obj1.created_at = rr["created_at"];
+        //                obj1.Pk_UserId = obj.Pk_UserId;
+        //                DataSet ds = obj1.SaveFetchPaymentResponse();
+
+
+
+        //            }
+        //        }
+
+        //        else
+        //        {
+        //            obj1.OrderId = obj.OrderId;
+        //            obj1.captured = "Failed";
+        //            obj1.Pk_UserId = obj.Pk_UserId;
+        //            DataSet ds = obj1.SaveFetchPaymentResponse();
+
+        //        }
+
+
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        obj1.OrderId = obj.OrderId;
+        //        obj1.captured = ex.Message;
+        //        obj1.Pk_UserId = obj.Pk_UserId;
+        //        DataSet ds = obj1.SaveFetchPaymentResponse();
+
+        //    }
+
+
+
+        //    string EncryptedText = "";
+        //    string CustData = "";
+        //    DataContractJsonSerializer js;
+        //    MemoryStream ms;
+        //    js = new DataContractJsonSerializer(typeof(FetchPaymentByOrderResponse));
+        //    ms = new MemoryStream();
+        //    js.WriteObject(ms, obj1);
+        //    ms.Position = 0;
+        //    StreamReader sr = new StreamReader(ms);
+        //    CustData = sr.ReadToEnd();
+        //    sr.Close();
+        //    ms.Close();
+        //    EncryptedText = Crypto.EncryptString(PaymentGateWayDetails.KeyName, CustData);
+        //    objApiResponse.Body = EncryptedText;
+        //    return Json(objApiResponse, JsonRequestBehavior.AllowGet);
+        //}
+
+        //public static HttpWebRequest FetchPaymentByOrderURL(string orderid)
+        //{
+        //    var url = PaymentGateWayDetails.FetchPaymentByOrderURL + "" + orderid + "/payments";
+        //    HttpWebRequest webRequest =
+        //    (HttpWebRequest)WebRequest.Create(@"" + url);
+        //    webRequest.ContentType = "application/json";
+        //    webRequest.Method = "POST";
+        //    return webRequest;
+        //}
+        //#endregion FetchPaymentByOrde
         public ActionResult Payment()
         {
             Customer obj = new Customer();
