@@ -26,12 +26,12 @@
                             <tr>
                                 <th>Image</th>
                                 <th>Product</th>
-                                <th>Price</th>
+                                <th>Price (Rs.)</th>
                                 <th>Qty</th>
 
-                                <th>Delivery Charge</th>
+                                <th>Delivery Charge (Rs.)</th>
 
-                                <th>Final Amt</th>
+                                <th>Final Amt (Rs.)</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -67,7 +67,7 @@
 
                                             </td>
                                             <td>
-                                                @Item.MRP
+                                                <i class="fa fa-rupee"></i> @Item.MRP
                                                 <input type="hidden" id="txt_@i" name="txt_@i" />
                                                 <input type="hidden" value="@Item.SoldOutCss" id="txtsod_@i" name="txtsod_@i" />
                                                 <input type="hidden" value="@Item.Fk_vendorId" id="txtvendorId_@i" name="txtvendorId_@i" />
@@ -80,11 +80,11 @@
                                             </td>
 
                                             <td>
-                                                <span id="spDel_@i">@Item.DeliveryCharge</span>
+                                                <i class="fa fa-rupee"></i> <span id="spDel_@i">@Item.DeliveryCharge</span>
                                             </td>
 
                                             <td>
-                                                <span id="subtotal_@i">@Item.FinalAmount</span>
+                                                <i class="fa fa-rupee"></i>  <span id="subtotal_@i">@Item.FinalAmount</span>
                                                 <span id="spTotalDelivery_@i"></span>
                                                 <span id="spTotalIndividual_@i"></span>
                                             </td>
@@ -224,10 +224,10 @@
                                 <input type="hidden" id="modeofpaymnt" />
                             </tr>
 
-                            @*<tr>
+                            <tr>
 
                                 <td colspan="4"><a href="#" data-toggle="modal" data-target="#Moneymodal">Add Money In GFY Wallet</a></td>
-                            </tr>*@
+                            </tr>
                         </tbody>
                     </table>
 
