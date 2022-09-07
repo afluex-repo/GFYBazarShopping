@@ -877,7 +877,6 @@ namespace GfyBazar.Controllers
             }
             return PartialView("_MenuShopping", Menu);
         }
-
         public ActionResult TryPrime()
         {
             try
@@ -918,7 +917,6 @@ namespace GfyBazar.Controllers
             }
 
         }
-
         public ActionResult FAQ()
         {
             return View();
@@ -935,7 +933,6 @@ namespace GfyBazar.Controllers
         {
             return View();
         }
-
         public ActionResult Maintenance()
         {
             return View();

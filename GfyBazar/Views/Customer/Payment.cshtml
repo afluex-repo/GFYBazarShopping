@@ -20,23 +20,79 @@
     }
 </style>
 <form action="/Customer/PaymentSuccess" method="POST">
-
-    <script src="https://checkout.razorpay.com/v1/checkout.js"
-            data-key="rzp_live_qLRGp52VYXezME"
-            data-amount="@Model.TotalAmount"
-            data-currency="INR"
-            data-order_id="@Model.OrderNo"
-            data-buttontext="Pay with Razorpay"
-            data-name="GFY BAZAR"
-            data-description="Add Money In GFY Bazar Wallet"
-            data-image="/Websitecss/img/logo.png"
-            data-prefill.name="@Model.Name"
-            data-prefill.email="@Model.EmailId"
-            data-prefill.contact="@Model.ContactNo"
-            data-theme.color="#157ed2">
-    </script>
-    <input type="hidden" custom="Hidden Element" name="hidden">
-
-    
+    @Html.HiddenFor(m=>m.OrderNo)
+    @Html.HiddenFor(m=>m.PaymentId)
+    @Html.HiddenFor(m=>m.Signature)
+    @Html.HiddenFor(m=>m.PaymentStatus)
+    @*<input type="hidden" name="orderid" id="orderid" />
+    <input type="hidden" name="paymentid" id="paymentid" />
+    <input type="hidden" name="signature" id="signature" />
+    <input type="hidden" name="paymentstatus" id="paymentstatus" />*@
+    <input type="submit" id="btnAfterPayment" hidden />
 </form>
+<button id="rzp-button1" class="btn btn-success">Pay with Razorpay</button>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+
+    @*var paymentNotes = @Html.Raw(Json.Serialize(Model.Notes));*@
+    var options = {
+        "key": "rzp_live_qLRGp52VYXezME",
+        "amount": "@Model.TotalAmount",
+        "currency": "INR",
+        "name": "@Model.Name",
+        "description": "Add Money In GFY Shopping Wallet",
+        "image": "/Websitecss/img/logo.png",
+        "order_id": "@Model.OrderNo",
+        "handler": function (response) {
+            //alert(response.razorpay_payment_id);
+            //alert(response.razorpay_order_id);
+            //alert(response.razorpay_signature)
+            $('#OrderNo').val(response.razorpay_order_id);
+            $('#PaymentId').val(response.razorpay_payment_id);
+            $('#Signature').val(response.razorpay_signature);
+            $('#PaymentStatus').val('Success');
+            $('#btnAfterPayment').click();
+        },
+        "prefill": {
+            "name": "@Model.Name",
+            "email": "@Model.EmailId",
+            "contact": "@Model.ContactNo"
+        },
+        "notes": "",
+        "theme": {
+            "color": "#157ed2"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.on('payment.failed', function (response) {
+        console.log(response.error);
+        $('#paymentstatus').val('Fail');
+        $('#btnAfterPayment').click();
+        //alert(response.error.code);
+        //alert(response.error.description);
+        //alert(response.error.source);
+        //alert(response.error.step);
+        //alert(response.error.reason);
+        //alert(response.error.metadata);
+    });
+    document.getElementById('rzp-button1').onclick = function (e) {
+        rzp1.open();
+        e.preventDefault();
+    }
+</script>
+@*<script src="https://checkout.razorpay.com/v1/checkout.js"
+        data-key="rzp_live_qLRGp52VYXezME"
+        data-amount="@Model.TotalAmount"
+        data-currency="INR"
+        data-order_id="@Model.OrderNo"
+        data-buttontext="Pay with Razorpay"
+        data-name="GFY SHOPPING"
+        data-description="Add Money In GFY Shopping Wallet"
+        data-image="/Websitecss/img/logo.png"
+        data-prefill.name="@Model.Name"
+        data-prefill.email="@Model.EmailId"
+        data-prefill.contact="@Model.ContactNo"
+        data-theme.color="#157ed2">
+</script>
+<input type="hidden" custom="Hidden Element" name="hidden"*@
 
