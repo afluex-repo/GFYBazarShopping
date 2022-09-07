@@ -1,0 +1,37 @@
+﻿@model GfyBazar.Models.Customer
+
+@{
+    ViewBag.Title = "privacy";
+    Layout = "~/Views/Shared/CustomerLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <table class="display nowrap table table-hover table-striped table-bordered dataTable no-footer" id="example23">
+                <thead>
+                    @if (Model != null)
+                    {
+                        if (Model.lstdetails != null)
+                        {
+                            int i = 1;
+                            foreach (var item in Model.lstdetails)
+                            {
+                                <tr>
+                                    <th>@i</th>
+                                    <th>@item.Termscondition</th>
+                                </tr>
+
+                                i++;
+                            }
+                        }
+                    }
+
+                </thead>
+            </table>
+        </div>
+        <div class="col-md-1"></div>
+        </div>
+</div>
+

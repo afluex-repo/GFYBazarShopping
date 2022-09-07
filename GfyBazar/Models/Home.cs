@@ -38,6 +38,8 @@ namespace GfyBazar.Models
         public string Url { get; set; }
         public List<Home> lstMenu { get; set; }
         public List<Home> lstsubmenu { get; set; }
+       
+
         public DataSet Login()
         {
             SqlParameter[] para ={new SqlParameter ("@LoginId",LoginId),
@@ -254,6 +256,8 @@ namespace GfyBazar.Models
             DataSet ds = Connection.ExecuteQuery("GetMenuUserWiseShopping", para);
             return ds;
         }
+
+        
 
     }
 }

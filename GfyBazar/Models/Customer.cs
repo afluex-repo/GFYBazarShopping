@@ -83,6 +83,9 @@ namespace GfyBazar.Models
         public string Name { get; set; }
         public string EmailId { get; set; }
         public string ContactNo { get; set; }
+
+        public string Termscondition { get; set; }
+        public List<Customer> lstdetails { get; set; }
         #region Properties
         public string CustomerID { get; set; }
         public string CustomerName { get; set; }
@@ -896,6 +899,11 @@ namespace GfyBazar.Models
             DataSet ds = Connection.ExecuteQuery("GetDashboardBanner");
             return ds;
         }
-        
+
+        public DataSet GetTermsCondition()
+        {
+            DataSet ds = Connection.ExecuteQuery("GetTermsCondition");
+            return ds;
+        }
     }
 }

@@ -1207,6 +1207,8 @@
     <Content Include="ServiceProvederLogo\tataskydth.webp" />
     <Content Include="ServiceProvederLogo\voda.webp" />
     <Content Include="Views\Home\Maintenance.cshtml" />
+    <Content Include="Views\Home\TermsAndCondition.cshtml" />
+    <Content Include="Views\Home\privacy.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
