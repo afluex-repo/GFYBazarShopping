@@ -48,6 +48,8 @@ namespace GfyBazar.Models
         public string OrderDetailsID { get; set; }
         public string OrderTotal { get; set; }
         public string OrderNo { get; set; }
+        public string PaymentId { get; set; }
+        public string PaymentStatus { get; set; }
         public string OrderDate { get; set; }
         public string OrderItems { get; set; }
         public string DeliveryDate { get; set; }
@@ -83,6 +85,9 @@ namespace GfyBazar.Models
         public string Name { get; set; }
         public string EmailId { get; set; }
         public string ContactNo { get; set; }
+
+        public string Termscondition { get; set; }
+        public List<Customer> lstdetails { get; set; }
         #region Properties
         public string CustomerID { get; set; }
         public string CustomerName { get; set; }
@@ -896,6 +901,11 @@ namespace GfyBazar.Models
             DataSet ds = Connection.ExecuteQuery("GetDashboardBanner");
             return ds;
         }
-        
+
+        public DataSet GetTermsCondition()
+        {
+            DataSet ds = Connection.ExecuteQuery("GetTermsCondition");
+            return ds;
+        }
     }
 }

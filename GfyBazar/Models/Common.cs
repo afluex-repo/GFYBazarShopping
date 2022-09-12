@@ -95,8 +95,8 @@ namespace GfyBazar.Models
             public static string CreateOrder = "https://api.razorpay.com/v1/orders";
             public static string CapturePayment = "https://api.razorpay.com/v1/payments/";
             public static string FetchPaymentByOrderURL = "https://api.razorpay.com/v1/orders/";
-            public static string KeyName = "rzp_live_IsKhZhtWWOAVUx";
-            public static string SecretKey = "nZMn2wBc4m6odf21XD5Wyt1y";
+            public static string KeyName = "rzp_live_qLRGp52VYXezME";
+            public static string SecretKey = "Oh8s2etj3g94N2JlHmBtVlAy";
         }
         public DataSet GetMemberDetails()
         {
