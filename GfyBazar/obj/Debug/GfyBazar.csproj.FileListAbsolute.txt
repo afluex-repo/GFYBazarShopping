@@ -157,7 +157,6 @@ E:\Repository\GFYBazarShopping\GfyBazar\bin\System.Web.Http.xml
 E:\Repository\GFYBazarShopping\GfyBazar\bin\System.Web.Http.WebHost.xml
 E:\Repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.dll
 E:\Repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.pdb
-E:\Repository-Projects\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.csprojResolveAssemblyReference.cache
 E:\SachinMishraProject\repository\GFYBazarShopping\GfyBazar\bin\ApplicationInsights.config
 E:\SachinMishraProject\repository\GFYBazarShopping\GfyBazar\bin\roslyn\csc.exe
 E:\SachinMishraProject\repository\GFYBazarShopping\GfyBazar\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -319,3 +318,4 @@ F:\Ashwani Afluex\repository\GFYBazarShopping\GfyBazar\bin\System.Web.Http.WebHo
 F:\Ashwani Afluex\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.dll
 F:\Ashwani Afluex\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.pdb
 F:\Ashwani Afluex\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.csprojResolveAssemblyReference.cache
+E:\Repository-Projects\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.csprojResolveAssemblyReference.cache
