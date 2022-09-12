@@ -187,20 +187,15 @@
 
     @@media (min-width: 320px) and (max-width: 568px) {
         .product .product-image .image img {
-          
             height: 184px;
-           
-        }
-    }
-    @@media (max-width: 991px) and (min-width: 768px)
-    {
-         .product .product-image .image img {
-          
-            height: 184px;
-           
         }
     }
 
+    @@media (max-width: 991px) and (min-width: 768px) {
+        .product .product-image .image img {
+            height: 184px;
+        }
+    }
 </style>
 
 
@@ -244,7 +239,7 @@
                                                                 <h3 class="name" style="height: 30px;"><a href="/Customer/QuickView?pid=@item.EncryptKey">@item.ProductName</a></h3>
                                                                 @*<div class="rating rateit-small"></div>*@
                                                                 <div class="description" style="color:blue">Redeem Point @item.RedeemPrice</div>
-                                                                <div class="product-price"> <span class="price"> @item.OfferedPrice </span> <span class="price-before-discount"> @item.MRP</span> </div>
+                                                                <div class="product-price"> <span class="price"><i class="fa fa-rupee"></i> @item.OfferedPrice </span> <span class="price-before-discount"><i class="fa fa-rupee"></i> @item.MRP</span> </div>
                                                                 <!-- /.product-price -->
 
                                                             </div>

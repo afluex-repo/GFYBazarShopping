@@ -1,0 +1,157 @@
+﻿@model GfyBazar.Models.Master
+
+@{
+    ViewBag.Title = "MainCategory";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("MainCategory", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data", @class = "forms-sample" }))
+{
+    if (TempData["MainCategory"] != null)
+    {
+        <div class="@TempData["Class"]">
+            @TempData["MainCategory"]
+        </div>
+    }
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Main Category</h4>
+
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <label>Main Category:<span style="color: red">*</span></label>
+                    @Html.TextBoxFor(m => m.MainCategoryName, new { @class = "form-control", @Placeholder = "Main Category Name", maxlength = "50" })
+                    @Html.HiddenFor(m => m.MainCategoryID, new { @class = "form-control" })
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            Main Category Image
+                        </label>
+                        <input type="file" name="postedFile" id="Image" onchange="readURL(this)" />
+                        <img src="@Model.Images" id="ContentPlaceHolder1_imgProductImage" class="fileinput-preview thumbnail" style="width: 150px; height: 100px;" />
+                    </div>
+                </div>
+                <div class="col">
+                    <br />
+                    <input class="btn btn-success  " onclick="return validateform()" type="submit" value="Save" id="btnSave" name="btnSave"  />
+                  @*  <a href="#" class="btn btn-success btn-sm" onclick="return updateMainCategory()" id="btnUpdate" style="display: none">Update</a>*@
+                    <input class="btn btn-success btn-sm" onclick="return updateMainCategory()" type="submit" name="btnUpdate" id="btnUpdate" value="Update" style="display: none" />
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <br />
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Main Category List</h4>
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered dataTable no-footer">
+                            <thead>
+                                <tr>
+                                    <th>SNo</th>
+                                    <th>Main Category Name</th>
+                                    <th>Image</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lstCategory != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var Item in Model.lstCategory)
+                                        {
+                                            <tr class="text-left">
+                                                <td>@i</td>
+                                                <td>@Item.MainCategoryName</td>
+                                                <td><img  src="@Item.Images" height="50" width="50" /></td>
+                                                <td>
+                                                    <a href="#" class="btn btn-primary btn-sm" onclick="editMainCategory('@Item.MainCategoryName','@Item.MainCategoryID','@Item.Images')">Edit</a>
+                                                    <a href="/Master/DeleteMainCategory/@Item.MainCategoryID" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you wish to delete this ?');">Delete</a>
+                                                </td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+}
+
+<script src="~/assets/libs/jquery-ui/jquery-ui.min.js"></script>
+<script>
+
+    function editMainCategory(maincategoryname, maincategoryid,img) {
+        $('#MainCategoryName').val(maincategoryname);
+        $('#MainCategoryID').val(maincategoryid);
+        $('#ContentPlaceHolder1_imgProductImage').attr("src", img);
+        $('#btnSave').hide();
+        $('#btnUpdate').show();
+    }
+
+    function updateMainCategory() {
+        $(".errortext").removeClass("errortext");
+        if ($('#MainCategoryName').val() == '') {
+            $("#MainCategoryName").addClass('errortext');
+            $('#MainCategoryName').focus();
+            return false;
+        }
+         
+    }
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#MainCategoryName').val() == '') {
+            $("#MainCategoryName").addClass('errortext');
+            $('#MainCategoryNames').focus();
+            return false;
+        }
+        return true;
+    }
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ContentPlaceHolder1_imgProductImage')
+                    .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+@*<script>
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true,
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ]
+            });
+        });
+    </script>*@
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>

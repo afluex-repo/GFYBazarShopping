@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Data;
 using GfyBazar.Models;
 using GfyBazar.Filter;
-using ShoppingPortal.Models;
 using Newtonsoft.Json;
-using System.Text;
 using GfyBazar.Models.RazpayModels;
 using System.Net;
 using Razorpay.Api;
 using static GfyBazar.Models.Common;
-
 namespace GfyBazar.Controllers
 {
     public class CustomerController : Controller
@@ -105,7 +100,7 @@ namespace GfyBazar.Controllers
             if (Session["CustomerID"] != null)
             {
 
-                
+
                 List<Customer> lst = new List<Customer>();
 
                 model.CustomerID = Session["CustomerID"].ToString();
@@ -141,7 +136,7 @@ namespace GfyBazar.Controllers
                         obj.VendorName = r["VendorName"].ToString();
                         obj.IsAvailable = r["IsAvailable"].ToString();
                         obj.SubTotal = r["SubTotal"].ToString();
-                        obj.FinalAmount = (decimal.Parse(r["SubTotal"].ToString()) + decimal.Parse(r["DeliveryCharge"].ToString())).ToString() ;
+                        obj.FinalAmount = (decimal.Parse(r["SubTotal"].ToString()) + decimal.Parse(r["DeliveryCharge"].ToString())).ToString();
                         //  obj.SoldOutCss = r["SoldOutCss"].ToString();
                         ViewBag.CartTotal = Math.Round(Convert.ToDecimal(ViewBag.CartTotal) + Convert.ToDecimal(r["Rate"].ToString()), 2);
                         ViewBag.TotalDelivery = Convert.ToDecimal(ViewBag.TotalDelivery) + Convert.ToDecimal(obj.DeliveryCharge);
@@ -152,7 +147,7 @@ namespace GfyBazar.Controllers
                     ViewBag.FinalAmount = Math.Round(float.Parse(ds.Tables[0].Compute("sum(SubTotalWithDelivery)", "").ToString()), 2);
                     ViewBag.RedeemPrice = (decimal.Parse(ds.Tables[0].Compute("sum(ShoppingPoint)", "").ToString()));
                     ViewBag.shoppingbalance = ds.Tables[4].Rows[0]["Balance"].ToString();
-                    if (Convert.ToDecimal(ViewBag.RedeemPrice )< Convert.ToDecimal(ViewBag.shoppingbalance))
+                    if (Convert.ToDecimal(ViewBag.RedeemPrice) < Convert.ToDecimal(ViewBag.shoppingbalance))
                     {
                         ViewBag.RedeemPrice = Math.Round(float.Parse(ds.Tables[0].Compute("sum(ShoppingPoint)", "").ToString()), 2);
                     }
@@ -190,7 +185,7 @@ namespace GfyBazar.Controllers
                     if (ds.Tables[2].Rows.Count > 0)
                     {
                         ViewBag.CustomerWallet = ds.Tables[2].Rows[0]["Balance"].ToString();
-                       
+
                     }
                     //Load Customer's Wallet Balance
                     if (Convert.ToDecimal(ViewBag.CartTotal) > Convert.ToDecimal(ViewBag.CustomerWallet))
@@ -691,7 +686,7 @@ namespace GfyBazar.Controllers
             return RedirectToAction("AddressBook");
         }
 
-        public ActionResult UpdateAddress(string AddressType, string FK_AddressID, string Landmark, string Locality, string Pincode, string HouseNo,string IsDefault,string DisplayName,string Contact)
+        public ActionResult UpdateAddress(string AddressType, string FK_AddressID, string Landmark, string Locality, string Pincode, string HouseNo, string IsDefault, string DisplayName, string Contact)
         {
             Customer obj = new Customer();
             try
@@ -1698,7 +1693,7 @@ namespace GfyBazar.Controllers
                         model.TotalAmount = ordertotal;
                         model.CustomerID = Session["CustomerID"].ToString();
                         model.PaymentModeID = Request["paymentMode"].ToString();
-                       
+
                         model.CouponID = null;
                         if (Request["addressType"] != null)
                         {
@@ -1777,7 +1772,7 @@ namespace GfyBazar.Controllers
                             obj.State = r["State"].ToString();
                             obj.City = r["City"].ToString();
                             obj.GSTNo = r["GSTNo"].ToString();
-                          
+
                             obj.ProductName = r["ProductName"].ToString();
                             obj.Description = r["ProductInfo"].ToString();
                             obj.MRP = r["Rate"].ToString();
@@ -2110,7 +2105,7 @@ namespace GfyBazar.Controllers
             }
 
             Customer model = new Customer();
-             
+
             List<Customer> lst = new List<Customer>();
             model.ProductID = Crypto.Decrypt(pid);
             model.ColorID = string.IsNullOrEmpty(colorid) ? null : colorid;
@@ -2168,7 +2163,7 @@ namespace GfyBazar.Controllers
                 model.StorageID = ds.Tables[0].Rows[0]["FK_StorageID"].ToString();
                 model.SizeID = ds.Tables[0].Rows[0]["FK_SizeID"].ToString();
                 model.MaterialID = ds.Tables[0].Rows[0]["Fk_MaterialId"].ToString();
-              
+
             }
             else
             {
@@ -2342,7 +2337,7 @@ namespace GfyBazar.Controllers
             //    model.Fk_vendorId = ds.Tables[8].Rows[0]["Fk_vendorId"].ToString();
 
             //}
-            DataSet dsImage = model.QuickView();
+            //DataSet dsImage = model.QuickView();
             if (ds.Tables.Count > 8)
             {
                 foreach (DataRow r in ds.Tables[8].Rows)
@@ -2364,6 +2359,15 @@ namespace GfyBazar.Controllers
             model.lstproductimages = lst;
 
             #region BindVendor
+            model.ProductID = Crypto.Decrypt(pid);
+            model.ColorID = string.IsNullOrEmpty(colorid) ? null : colorid;
+            model.SizeID = string.IsNullOrEmpty(sizeid) ? null : sizeid;
+            model.FlavorID = string.IsNullOrEmpty(flavorid) ? null : flavorid;
+            model.MaterialID = string.IsNullOrEmpty(materialid) ? null : materialid;
+            model.RamID = string.IsNullOrEmpty(ramid) ? null : ramid;
+            model.StorageID = string.IsNullOrEmpty(storageid) ? null : storageid;
+            model.StarRatingID = string.IsNullOrEmpty(starid) ? null : starid;
+            model.Landmark = string.IsNullOrEmpty(last) ? null : last;
             DataSet dsVendor = model.GetVendorForProduct();
             if (dsVendor != null && dsVendor.Tables[0].Rows.Count > 0)
             {
@@ -2399,7 +2403,10 @@ namespace GfyBazar.Controllers
             }
             #endregion
 
-            Session["PrimaryImage"] = dsVendor.Tables[2].Rows[0]["ImagePath"].ToString();
+            if (dsVendor != null && dsVendor.Tables[2].Rows.Count > 0)
+            {
+                Session["PrimaryImage"] = dsVendor.Tables[2].Rows[0]["ImagePath"].ToString();
+            }
             ViewBag.Title = model.ProductName + ' ' + model.ShortDescription;
             #region Bind Seller review
             List<Customer> lstseller = new List<Customer>();
@@ -2858,20 +2865,14 @@ namespace GfyBazar.Controllers
                 obj.TransactionType = "Wallet Web";
                 obj.Type = "Card";
                 DataSet ds = obj.SaveOrderDetails();
-            
                 Session["OrderId"] = order["id"].ToString();
                 Session["Amount"] = obj.amount;
-
             }
             catch (Exception ex)
             {
                 obj1.Status = "1";
                 obj1.ErrorMessage = ex.Message;
             }
-
-
-
-          
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
@@ -2887,7 +2888,6 @@ namespace GfyBazar.Controllers
         public ActionResult Payment()
         {
             Customer obj = new Customer();
-  
             obj.TotalAmount = Session["Amount"].ToString();
             obj.OrderNo = Session["OrderId"].ToString();
             obj.Name = Session["CustomerName"].ToString();
@@ -2895,9 +2895,63 @@ namespace GfyBazar.Controllers
             obj.EmailId = Session["EmailId"].ToString();
             return View(obj);
         }
-        public ActionResult PaymentSuccess()
+        public ActionResult PaymentSuccess(Customer model)
         {
-             return RedirectToAction("Cart");
+            CreateOrder obj = new CreateOrder();
+            obj.OrderId = model.OrderNo;
+            obj.Pk_UserId = Session["CustomerID"].ToString();
+            FetchPaymentByOrderResponse obj1 = new FetchPaymentByOrderResponse();
+            string random = Common.GenerateRandom();
+            Dictionary<string, object> options = new Dictionary<string, object>();
+            options.Add("orderid", obj.OrderId);
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            RazorpayClient client = new RazorpayClient(PaymentGateWayDetails.KeyName, PaymentGateWayDetails.SecretKey);
+            List<Razorpay.Api.Payment> orderdetails = client.Order.Payments(obj.OrderId);
+            if (orderdetails.Count > 0)
+            {
+                for (int i = 0; i <= orderdetails.Count - 1; i++)
+                {
+                    dynamic rr = orderdetails[i].Attributes;
+                    obj1.PaymentId = rr["id"];
+                    obj1.entity = rr["entity"];
+                    obj1.amount = rr["amount"];
+                    obj1.currency = rr["currency"];
+                    obj1.status = rr["status"];
+                    obj1.OrderId = rr["order_id"];
+                    obj1.invoice_id = rr["invoice_id"];
+                    obj1.international = rr["international"];
+                    obj1.method = rr["method"];
+                    obj1.amount_refunded = rr["amount_refunded"];
+                    obj1.refund_status = rr["refund_status"];
+                    obj1.captured = rr["captured"];
+                    obj1.description = rr["description"];
+                    obj1.card_id = rr["card_id"];
+                    obj1.bank = rr["bank"];
+                    obj1.wallet = rr["wallet"];
+                    obj1.vpa = rr["vpa"];
+                    obj1.email = rr["email"];
+                    obj1.contact = rr["contact"];
+                    obj1.fee = rr["fee"];
+                    obj1.tax = rr["tax"];
+                    obj1.error_code = rr["error_code"];
+                    obj1.error_description = rr["error_description"];
+                    obj1.error_source = rr["error_source"];
+                    obj1.error_step = rr["error_step"];
+                    obj1.error_reason = rr["error_reason"];
+                    obj1.created_at = rr["created_at"];
+                    obj1.Pk_UserId = obj.Pk_UserId;
+                    DataSet ds = obj1.SaveFetchPaymentResponse();
+                }
+                return RedirectToAction("Cart");
+            }
+            else
+            {
+                obj1.OrderId = obj.OrderId;
+                obj1.captured = "Failed";
+                obj1.Pk_UserId = obj.Pk_UserId;
+                DataSet ds = obj1.SaveFetchPaymentResponse();
+                return RedirectToAction("Payment");
+            }
         }
     }
 }

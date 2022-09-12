@@ -1,0 +1,202 @@
+﻿@model GfyBazar.Models.Master
+@{
+    ViewBag.Title = "Offer";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("SaveOffer", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Add Offer</h4>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        Offer Name <span style="color: red">*</span>
+                        @Html.TextBoxFor(m => m.OfferName, new { @class = "form-control", @Placeholder = "Offer Name" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        FromDate<span style="color: red">*</span>
+                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "Enter Offer From Date", @readonly = "readonle" })
+                        @Html.HiddenFor(m => m.OfferID)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        ToDate <span style="color: red">*</span>
+                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "Enter Offer To Date", @readonly = "readonle" })
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        DiscountPercentage <span style="color: red">*</span>
+                        @Html.TextBoxFor(m => m.DiscountPercent, new { @class = "form-control", @Placeholder = "DiscountPercentage"  })
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        Display Order <span style="color: red">*</span>
+                        @Html.TextBoxFor(m => m.DisplayOrder, new { @class = "form-control", @Placeholder = "Display Order", @onkeypress = "return isNumberOrDecimal(event);" })
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        Offer Status <span style="color: red">*</span>
+                        @Html.DropDownListFor(m => m.OfferStatus, new SelectList(ViewBag.ddlOfferStatus, "Value", "Text"), new { @class = "form-control" })
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @*<img src="@Model.ProfilePicture" height="190" width="250" />*@
+                        Offer  Image <span style="color: red">*</span>
+                        <input type="file" name="postedFile" id="postedFile" onchange="readURL(this)" />
+                        <img src="@Model.OfferImage" id="ContentPlaceHolder1_imgProductImage" class="fileinput-preview thumbnail" style="width: 150px; height: 100px;" />
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @if (Model.OfferID == null)
+                        {
+                            <input class="btn btn-success btn-sm" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="Save" />
+                        }
+                        else
+                        {
+                            @Html.HiddenFor(m => m.OfferID, new { @Value = @Model.OfferID })
+                            <input class="btn btn-success btn-sm" type="submit" value="Update" id="btnUpdate" name="Update" onclick="return validateform();" />
+                        }
+                        <a href="/Master/OfferList" class="btn btn-primary btn-sm">Back To List</a>
+                    </div>
+
+                </div>
+                <p style="color: red">
+                    @TempData["Offer"]
+                    <br />
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+}
+
+
+<script src="../../AdminCSS/js/jquery.min.js"></script>
+<script>
+
+
+    function isNumberOrDecimal(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#OfferName').val() == '') {
+            $("#OfferName").addClass('errortext');
+            $('#OfferName').focus();
+            return false;
+        }
+        if ($('#FromDate').val() == '') {
+            $("#FromDate").addClass('errortext');
+            $('#FromDate').focus();
+            return false;
+        }
+        if ($('#ToDate').val() == '') {
+            $("#ToDate").addClass('errortext');
+            $('#ToDate').focus();
+            return false;
+        }
+        if ($('#DiscountPercentage').val() == '') {
+            $("#DiscountPercentage").addClass('errortext');
+            $('#DiscountPercentage').focus();
+            return false;
+        }
+        
+        if ($('#DisplayOrder').val() == '') {
+            $("#DisplayOrder").addClass('errortext');
+            $('#DisplayOrder').focus();
+            return false;
+        }
+        if ($('#OfferStatus').val() == '') {
+            $("#OfferStatus").addClass('errortext');
+            $('#OfferStatus').focus();
+            return false;
+        }
+        if ($('#postedFile').val() == '') {
+            $("#postedFile").addClass('errortext');
+            $('#postedFile').focus();
+            alert("Please select image..!");
+            return false;
+        }
+        return true;
+    }
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ContentPlaceHolder1_imgProductImage')
+                    .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+@*<script>
+    $(document).ready(function () {
+        $('#dataTables-example').DataTable({
+            responsive: true,
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ]
+        });
+    });
+</script>*@
+
+<style>
+    .errortext
+    {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script>
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true,
+
+    });
+
+</script>

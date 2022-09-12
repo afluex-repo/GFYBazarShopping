@@ -1,0 +1,217 @@
+﻿@model GfyBazar.Models.Customer
+
+@{
+    ViewBag.Title = "MyOrders";
+    Layout = "~/Views/Shared/CustomerLayout.cshtml";
+}
+
+
+<div class="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-inner">
+            <ul class="list-inline list-unstyled">
+                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                <li><a href="#">My Orders</a></li>
+            </ul>
+        </div><!-- /.breadcrumb-inner -->
+    </div><!-- /.container -->
+</div>
+<main class="main">
+    <div class="sign-in-page spaceacc">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 order-lg-last dashboard-content">
+                    @*<h2>Orders</h2>*@
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @if (Model != null)
+                            {
+                                if (Model.lstOrderNo != null)
+                                {
+                                    foreach (var item in Model.lstOrderNo)
+                                    {
+                            <div class="col-md-12">
+                                <h2 class="product-title">
+                                    <a class="btn btn-primary" style="color:white">Order No : @item.OrderNo</a>
+                                    <a class="btn btn-primary float-right" href="/Customer/TrackOrder?orderID=@item.PK_OrderID" style="color:white; margin-right:2%">Track order</a>
+                                    <a class="btn btn-primary float-right" href="/Customer/Invoice?ono=@item.OrderNo" style="color:white; margin-right:2%" target="_blank">Print Invoice</a>
+                                </h2>
+                                @if (Model.lstOrders != null)
+                                            {
+                                                foreach (var itemDetails in Model.lstOrders)
+                                                {
+                                                    if (item.OrderNo == itemDetails.OrderNo)
+                                                    {
+                                            <div class="product-desc">
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                        <img src="/@itemDetails.PrimaryImage" alt="product" height="50" width="50" class="img-responsive" style="margin-left:5%">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        @itemDetails.ProductName<br />
+                                                        <small>Color : @itemDetails.ColorName</small>&nbsp;<small>Size : @itemDetails.SizeName</small>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        @itemDetails.DeliveryDate <br />
+                                                        <small>Expected Delivery</small>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        @itemDetails.ProductQuantity x @itemDetails.Rate
+                                                        <small>RedeemPrice: @itemDetails.RedeemPrice</small>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        @itemDetails.DeliveryCharge <br/>
+                                                     <small> Delivery Charges</small> 
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        &#8377; @itemDetails.TotalAmount
+                                                         
+                                                    </div>
+                                                    @*<div class="col-md-2">
+                                                        @if (itemDetails.Status == "Placed" || itemDetails.Status == "Packed" || itemDetails.Status == "Shipped")
+                                                                    {
+                                                                    <a onclick="return cancelOrder(@itemDetails.OrderDetailsID)">
+                                                                        <img src="~/images/delete-icon.png" style="height:20px;width:20px;" title="Cancel" />
+                                                                    </a>
+                                                                    }
+                                                                    else if (itemDetails.Status == "Delivered")
+                                                                    {
+                                                                        if (int.Parse(itemDetails.DayDifference) <= 15)
+                                                                        {
+                                                                    <a onclick="return openReturnPopup('@itemDetails.OrderDetailsID','@item.PK_OrderID')">
+                                                                        <img src="~/images/return.png" style="height:20px;width:20px;" title="Return" />
+                                                                    </a>
+                                                                    <a href="/Customer/Exchange?pid=@itemDetails.EncryptKey&od=@item.PK_OrderID&dd=@itemDetails.OrderDetailsID&ot=@itemDetails.TotalAmount">Exchange Item</a>
+                                                                        }
+                                                                    }
+                                                                    else if (itemDetails.Status == "Return Requested")
+                                                                    {
+                                                                    <label class="label label-success">Return Requested</label>
+                                                                    }
+                                                                    else if (itemDetails.Status == "Return Approved")
+                                                                    {
+                                                                    <label class="label label-success">Return Completed</label>
+                                                                    }
+                                                                    else if (itemDetails.Status == "Exchange Requested")
+                                                                    {
+                                                                    <label class="label label-success">Exchange Requested</label>
+                                                                    }
+                                                                    else if (itemDetails.Status == "Exchange Approved")
+                                                                    {
+                                                                    <label class="label label-success">Exchange Approved</label>
+                                                                    }
+                                                        @if (itemDetails.Status == "Refund" || itemDetails.Status == "Cancelled")
+                                                                    {
+                                                                    @itemDetails.Status
+                                                                    }
+
+
+                                                    </div>*@
+                                                </div>
+                                            </div>
+                                            <div class="mb-2"></div>
+                                                    }
+                                                }
+                                            <span class="float-right" style="margin-right:3%;color:blue">Order Date : @item.OrderDate</span>
+                                            <span class="float-right" style="margin-right:3%;color:blue">Order Total :  &#8377; @item.SubTotal</span>
+                                            <hr />
+                                            }
+                            </div>
+
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="mb-2"></div>
+                </div>
+                @{Html.RenderAction("CustomerLeftMenu", "Customer", new { area = "" });}
+            </div>
+        </div>
+        <div class="mb-5"></div>
+        <!---Return Request Popup--->
+        <div id="returnReq" class="modal fade" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content p-sm-3">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span> </button>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item"><a id="login-tab" class="nav-link active text-4" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Return Request</a> </li>
+                        </ul>
+                        <div class="tab-content pt-4">
+                            <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                                <div class="row">
+                                    <div class="col-md-12 form-group">
+                                        <label>Reason</label>
+                                        @Html.TextBoxFor(m => m.Description, new { @class = "form-control", @placeholder = "Description" })
+                                        <input type="hidden" id="hdOrderID" />
+                                        <input type="hidden" id="hdOrderDetailsID" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-9 form-group">
+                                        <input type="button" value="Submit Request" class="btn btn-sm btn-primary float-right" onclick="return returnOrder();" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---Return Request Popup--->
+</main>
+<script src="../../AdminCSS/js/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+    function cancelOrder(orderDetailsID) {
+        debugger;
+        var result = confirm("Are you sure you want to cancel this Order ?");
+        if (result == true) {
+            $.ajax({
+                url: "/Customer/CancelOrder",
+                Type: "Get",
+                DataType: "JSON",
+                data: { orderDetailsID: orderDetailsID },
+                success: function (data) {
+                    if (data.Result == "1") {
+                        alert("Order was Cancelled.");
+                        window.location.reload();
+                    }
+                    else {
+                        alert("Error : " + data.Status);
+                    }
+                }
+            });
+        }
+    }
+    function openReturnPopup(orderDetailsID, orderID) {
+        document.getElementById('hdOrderID').value = orderID;
+        document.getElementById('hdOrderDetailsID').value = orderDetailsID;
+        $('#returnReq').modal('show');
+    }
+    function returnOrder() {
+        debugger;
+        var result = confirm("Are you sure you want to return this Order ?");
+        if (result == true) {
+            $.ajax({
+                url: "/Customer/ReturnOrder",
+                Type: "Get",
+                DataType: "JSON",
+                data: { orderDetailsID: document.getElementById('hdOrderDetailsID').value, orderID: document.getElementById('hdOrderID').value, desc: $('#Description').val() },
+                success: function (data) {
+                    if (data.Result == "1") {
+                        alert("Return Request has been submitted.");
+                        window.location.reload();
+                    }
+                    else {
+                        alert("Error : " + data.Status);
+                    }
+                }
+            });
+        }
+    }
+</script>
