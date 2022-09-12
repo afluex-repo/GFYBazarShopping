@@ -16,15 +16,15 @@
                         if (Model.lstdetails != null)
                         {
                             int i = 1;
-                            foreach (var item in Model.lstdetails)
+                            foreach (var item1 in Model.lstdetails)
                             {
                                 <tr>
                                     <th>@i</th>
-                                    <th>@item.Termscondition</th>
+                                    <th>@item1.CardNo</th>
                                 </tr>
-
-                                i++;
+                                i=i+1;
                             }
+
                         }
                     }
 

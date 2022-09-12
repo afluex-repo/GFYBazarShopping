@@ -877,7 +877,6 @@ namespace GfyBazar.Controllers
             }
             return PartialView("_MenuShopping", Menu);
         }
-
         public ActionResult TryPrime()
         {
             try
@@ -918,7 +917,6 @@ namespace GfyBazar.Controllers
             }
 
         }
-
         public ActionResult FAQ()
         {
             return View();
@@ -935,25 +933,23 @@ namespace GfyBazar.Controllers
         {
             return View();
         }
-
         public ActionResult Maintenance()
         {
             return View();
         }
 
         
-        public ActionResult privacy()
+        public ActionResult privacy(Customer obj)
         {
-            Customer obj = new Customer();
             List<Customer> lst = new List<Customer>();
             DataSet ds = obj.GetTermsCondition();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
-                    obj.Termscondition = r["Termscondition"].ToString();
-
-                    lst.Add(obj);
+                    Customer obj1 = new Customer();
+                    obj1.CardNo = r["Termscondition"].ToString();
+                    lst.Add(obj1);
                 }
                 obj.lstdetails = lst;
             }

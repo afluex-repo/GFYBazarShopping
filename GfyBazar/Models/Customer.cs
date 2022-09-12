@@ -48,6 +48,8 @@ namespace GfyBazar.Models
         public string OrderDetailsID { get; set; }
         public string OrderTotal { get; set; }
         public string OrderNo { get; set; }
+        public string PaymentId { get; set; }
+        public string PaymentStatus { get; set; }
         public string OrderDate { get; set; }
         public string OrderItems { get; set; }
         public string DeliveryDate { get; set; }
