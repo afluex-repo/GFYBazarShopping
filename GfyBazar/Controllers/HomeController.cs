@@ -937,5 +937,31 @@ namespace GfyBazar.Controllers
         {
             return View();
         }
+
+        
+        public ActionResult privacy(Customer obj)
+        {
+            List<Customer> lst = new List<Customer>();
+            DataSet ds = obj.GetTermsCondition();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Customer obj1 = new Customer();
+                    obj1.CardNo = r["Termscondition"].ToString();
+                    lst.Add(obj1);
+                }
+                obj.lstdetails = lst;
+            }
+            return View(obj);
+        }
+
+        public ActionResult TermsAndCondition()
+        {
+            return View();
+        }
     }
 }
+
+
+
