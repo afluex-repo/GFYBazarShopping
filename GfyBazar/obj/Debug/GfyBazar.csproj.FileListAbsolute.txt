@@ -318,3 +318,4 @@ F:\Ashwani Afluex\repository\GFYBazarShopping\GfyBazar\bin\System.Web.Http.WebHo
 F:\Ashwani Afluex\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.dll
 F:\Ashwani Afluex\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.pdb
 F:\Ashwani Afluex\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.csprojResolveAssemblyReference.cache
+E:\Repository-Projects\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.csprojResolveAssemblyReference.cache
