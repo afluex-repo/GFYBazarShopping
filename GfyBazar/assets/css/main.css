@@ -6061,8 +6061,8 @@ z-index:10000
             -webkit-border-radius: 50%;
             border-radius: 50%;
             font-family: "montserratbold", sans-serif;
-            border: 1px solid #086fcf;
-            color: #086fcf;
+            border: 1px solid #1fa48a;
+            color: #000;
             cursor: pointer;
             display: block;
             height: 50px;
@@ -6076,7 +6076,7 @@ z-index:10000
         }
 
         .swatch input:not(:checked) + label {
-            border-color: #edeff2 !important;
+            border-color: #1fa48a !important;
         }
 
             .swatch input:not(:checked) + label:hover {
