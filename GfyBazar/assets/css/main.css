@@ -5985,12 +5985,9 @@ z-index:10000
             width: 10px;
         }
 
-        
-
-       
     .swatch {
         float: left;
-        margin-right: 40px;
+        margin-right: 15px;
     }
 
         .swatch:nth-last-child(2) {
@@ -6068,10 +6065,10 @@ z-index:10000
             color: #086fcf;
             cursor: pointer;
             display: block;
-            height: 42px;
-            padding-top: 11px;
+            height: 50px;
+            padding-top: 15px;
             text-align: center;
-            width: 42px;
+            width: 50px;
         }
 
         .swatch .color input:checked + label span:after {
@@ -6091,7 +6088,7 @@ z-index:10000
         }
 
         .swatch .blue input:checked + label {
-            border-color: #086fcf !important;
+            /*border-color: #086fcf !important;*/
         }
 
         .swatch .yellow input:checked + label {
@@ -6103,7 +6100,7 @@ z-index:10000
         }
 
         .swatch .blue label span {
-            background-color: #086fcf !important;
+            /*background-color: #086fcf !important;*/
         }
 
         .swatch .yellow label span {
@@ -6137,82 +6134,7 @@ z-index:10000
         opacity: 0.6;
     }
 
-    .swatch .tooltip {
-        -moz-border-radius: 2px;
-        -webkit-border-radius: 2px;
-        border-radius: 2px;
-        text-align: center;
-        background-color: rgba(22, 22, 26, 0.93);
-        color: #fff;
-        bottom: 100%;
-        padding: 10px;
-        display: block;
-        position: absolute;
-        width: 100px;
-        left: -23px;
-        margin-bottom: 15px;
-        filter: alpha(opacity=0);
-        -khtml-opacity: 0;
-        -moz-opacity: 0;
-        opacity: 0;
-        visibility: hidden;
-        -webkit-transform: translateY(10px);
-        -moz-transform: translateY(10px);
-        -ms-transform: translateY(10px);
-        -o-transform: translateY(10px);
-        transform: translateY(10px);
-        -webkit-transition: all .25s ease-out;
-        -moz-transition: all .25s ease-out;
-        -ms-transition: all .25s ease-out;
-        -o-transition: all .25s ease-out;
-        transition: all .25s ease-out;
-        -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
-        -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
-        -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
-        -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
-        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
-        z-index: 10000;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-
-        .swatch .tooltip:before {
-            bottom: -20px;
-            content: " ";
-            display: block;
-            height: 20px;
-            left: 0;
-            position: absolute;
-            width: 100%;
-        }
-
-        .swatch .tooltip:after {
-            border-left: solid transparent 10px;
-            border-right: solid transparent 10px;
-            border-top: solid rgba(22, 22, 26, 0.93) 10px;
-            bottom: -10px;
-            content: " ";
-            height: 0;
-            left: 50%;
-            margin-left: -13px;
-            position: absolute;
-            width: 0;
-        }
-
-    .swatch .swatch-element:hover .tooltip {
-        filter: alpha(opacity=100);
-        -khtml-opacity: 1;
-        -moz-opacity: 1;
-        opacity: 1;
-        visibility: visible;
-        -webkit-transform: translateY(0px);
-        -moz-transform: translateY(0px);
-        -ms-transform: translateY(0px);
-        -o-transform: translateY(0px);
-        transform: translateY(0px);
-    }
-
+   
     .swatch.error {
         background-color: #E8D2D2 !important;
         color: #333 !important;
@@ -6235,3 +6157,25 @@ z-index:10000
         .swatch.error code {
             font-family: monospace;
         }
+
+        .quantity {
+       font-size: 107.69231%;
+    line-height: 128.57143%;
+    border: 0 none;
+    color: #fff;
+    float: right;
+    height: 50px;
+    width:100px;
+    border:1px solid #086fcf;
+    padding: 11px 10px 15px 10px;
+}
+    .quantity i, .qty {
+    cursor: pointer;
+    margin:6px;
+    color:#000;
+}
+
+    .mt_25
+    {
+        margin-top:25px;
+    }
