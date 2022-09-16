@@ -1403,7 +1403,7 @@ font-family: 'Poppins', sans-serif;
   color: #FFFFFF;
   font-family: 'Poppins', sans-serif;
   font-size: 13px !important;
-  line-height: 20px;
+  line-height: 30px;
   padding: 11px 15px;
   text-transform: uppercase;
   -moz-transition: all 0.2s linear 0s;
@@ -6163,6 +6163,7 @@ z-index:10000
     line-height: 128.57143%;
     border: 0 none;
     color: #fff;
+    display:flex;
     float: right;
     height: 50px;
     width:100px;
@@ -6179,3 +6180,32 @@ z-index:10000
     {
         margin-top:25px;
     }
+    .qty_border
+    {
+        border:none;
+        box-shadow:none;
+        height:24px;
+    }
+    .special-menu
+    {
+        background:#000;
+        padding-right:15px;
+    }
+    .yamm .dropdown-menu li a {
+        padding: 1px 0px !important;
+    }
+    blink {
+  animation: 2s linear infinite condemned_blink_effect;
+}
+
+@keyframes condemned_blink_effect {
+  0% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+}

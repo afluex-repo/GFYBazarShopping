@@ -1,8 +1,6 @@
 ﻿@model GfyBazar.Models.Customer
 <style>
-    .yamm .dropdown-menu li a {
-        padding: 1px 0px !important;
-    }
+    
 </style>
 <div class="nav-outer">
     <ul class="nav navbar-nav">
@@ -44,15 +42,9 @@
                                         }
                                     </div>
 
-
                                 </div>
-
-
-
                             </li>
                         </ul>
-
-
 
                     </li>
 
@@ -60,5 +52,114 @@
                 i++;
             }
         }
+@if (Session["CustomerID"] != null)
+{
+        <li class="dropdown navbar-right special-menu">
+            <a href="#" data-toggle="modal" data-target="#Moneymodal"><img src="~/assets/images/icon/purse.png" style="height:30px;"/> Wallet: <blink><i class="fa fa-inr"></i> @Session["WalletHomeBalance"]</blink></a>
+        </li>
+}
     </ul>
 </div>
+<div id="Moneymodal" class="modal fade" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width:70%">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Money In GFY  Wallet</h5>
+
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Amount</label>
+                        <input type="text" class="form-control" placeholder="Amount" id="txtamt" onkeypress="return isNumberKey(event);" />
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <b style="color:red">
+                            Extra Charges On Different Payment Mode
+                        </b>
+
+                    </div>
+
+                </div>
+                <br />
+                @*<div class="row">
+                        <div class="col-md-12">
+
+                            <table class="display nowrap table table-hover table-striped table-bordered dataTable no-footer">
+
+                                <tbody>
+                                    <tr>
+                                        <td style="color:blue">Payment Methods</td>
+                                        <td style="color:blue">Enterprise Plan</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Debit Cards (< Rs 2,000)</td>
+                                        <td>0.50%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Debit Cards (> Rs 2,000)</td>
+                                        <td>1.00%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Credit Cards</td>
+                                        <td>1.80%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>RuPay Debit Card</td>
+                                        <td>0.20%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Net-banking</td>
+                                        <td>1.80%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mobile Wallets</td>
+                                        <td>1.90%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>EMI /AMEX/International</td>
+                                        <td>2.85%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>UPI</td>
+                                        <td>0.30%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>*@
+            </div>
+            <div class="modal-footer">
+                <input type="button" value="Add Money" class="btn btn-sm btn-primary float-right" onclick="return addmoney();" />
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="../../AdminCSS/js/jquery.min.js"></script>
+<script>
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+    function addmoney() {
+        $.ajax({
+            url: '/Customer/CreateOrder', type: 'post', dataType: 'json',
+            data: { 'Amount': $('#txtamt').val() },
+            success: function (data) {
+                window.location = "/Customer/Payment";
+            }
+
+        });
+    }
+</script>

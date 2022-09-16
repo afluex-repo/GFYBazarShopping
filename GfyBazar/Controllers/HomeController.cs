@@ -613,6 +613,7 @@ namespace GfyBazar.Controllers
                         if (model.Password == Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString()))
                         {
                             model.Result = "1";
+                            Session["WalletHomeBalance"] = ds.Tables[1].Rows[0]["WalletBalance"].ToString();
                             Session["CustomerName"] = ds.Tables[0].Rows[0]["CustomerName"].ToString();
                             Session["CustomerID"] = ds.Tables[0].Rows[0]["PK_CustomerID"].ToString();
                             Session["Contact"] = ds.Tables[0].Rows[0]["Contact"].ToString();
