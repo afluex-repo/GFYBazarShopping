@@ -3,6 +3,21 @@
     .yamm .dropdown-menu li a {
         padding: 1px 0px !important;
     }
+    blink {
+  animation: 2s linear infinite condemned_blink_effect;
+}
+
+@@keyframes condemned_blink_effect {
+  0% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+}
 </style>
 <div class="nav-outer">
     <ul class="nav navbar-nav">
@@ -44,15 +59,9 @@
                                         }
                                     </div>
 
-
                                 </div>
-
-
-
                             </li>
                         </ul>
-
-
 
                     </li>
 
@@ -60,5 +69,8 @@
                 i++;
             }
         }
+        <li class="dropdown navbar-right special-menu">
+            <a href="#"><img src="~/assets/images/icon/purse.png" style="height:30px;"/> Wallet Amount: <blink><i class="fa fa-inr"></i> 500</blink></a>
+        </li>
     </ul>
 </div>
