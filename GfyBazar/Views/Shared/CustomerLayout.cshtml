@@ -82,6 +82,7 @@
                             @if (Session["CustomerID"] != null)
                             {
                             <li><a href="#"> Welcome @Session["CustomerName"]</a></li>
+                            <li><a href="/Customer/MyAccount"><i class="icon fa fa-user"></i>My Wallet</a></li>
                             <li><a href="/Customer/MyAccount"><i class="icon fa fa-user"></i>My Account</a></li>
 
                             <li><a href="/Customer/Cart"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
@@ -89,6 +90,7 @@
                             }
                             else
                             {
+                            <li><a href="/Customer/MyAccount"><i class="icon fa fa-user"></i>My Wallet</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#login-signup"><i class="icon fa fa-user"></i>My Account</a></li>
 
                             <li><a href="#" data-toggle="modal" data-target="#login-signup"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>

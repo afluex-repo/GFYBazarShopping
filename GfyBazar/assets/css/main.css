@@ -1403,7 +1403,7 @@ font-family: 'Poppins', sans-serif;
   color: #FFFFFF;
   font-family: 'Poppins', sans-serif;
   font-size: 13px !important;
-  line-height: 20px;
+  line-height: 30px;
   padding: 11px 15px;
   text-transform: uppercase;
   -moz-transition: all 0.2s linear 0s;
@@ -6185,4 +6185,10 @@ z-index:10000
         border:none;
         box-shadow:none;
         height:24px;
+    }
+
+    .special-menu
+    {
+        background:#000;
+        padding-right:15px;
     }

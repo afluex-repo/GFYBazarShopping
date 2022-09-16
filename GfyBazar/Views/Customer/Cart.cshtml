@@ -5,6 +5,9 @@
     Layout = "~/Views/Shared/CustomerLayout.cshtml";
 }
 <style>
+    .errortext {
+        border: 1px solid red !important;
+    }
     .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
         border: 1px solid #ddd;
     }
@@ -429,12 +432,8 @@
     </div>
 
 </div>
+<br/><br/>
 
-<style>
-    .errortext {
-        border: 1px solid red !important;
-    }
-</style>
 <script src="../../AdminCSS/js/jquery.min.js"></script>
 <script>
     function isNumberKey(evt) {
