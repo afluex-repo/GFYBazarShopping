@@ -7,20 +7,33 @@ namespace GfyBazar
 {
     static public class BLSMS
     {
-        //static public void SendSMS(string Mobile, string Message)
-        //{
-        //    try
-        //    {
-        //        string SMSAPI = "http://smsw.co.in/API/WebSMS/Http/v1.0a/index.php?username=GfyBazar[AND]password=aapka123[AND]sender=APKBIZ[AND]to=[MOBILE][AND]message=[MESSAGE][AND]reqid=1[AND]format={json}[AND]route_id=39[AND]callback=#[AND]unique=0[AND]sendondate=" + DateTime.Now.ToString();
+        static public void SendSms(string mobile, string Message, string TempId)
+        {
+            try
+            {
+                string SMSAPI = ConfigurationManager.AppSettings["SMSAPI"].ToString();
+                SMSAPI = SMSAPI.Replace("[AND]", "&");
+                SMSAPI = SMSAPI.Replace("[Mobile]", mobile);
+                SMSAPI = SMSAPI.Replace("[SMS]", Message);
+                SMSAPI = SMSAPI.Replace("[TempId]", TempId);
+                SMSAPI = SMSAPI.Replace("[Date]", DateTime.Now.ToString());
+                HttpWebRequest httpreq = (HttpWebRequest)WebRequest.Create(new Uri(SMSAPI, false));
+                HttpWebResponse httpresponse = (HttpWebResponse)(httpreq.GetResponse());
+            }
+            catch (Exception)
+            {
 
-        //        HttpWebRequest httpReq = (HttpWebRequest)WebRequest.Create(new Uri(SMSAPI, false));
-        //        HttpWebResponse httpResponse = (HttpWebResponse)(httpReq.GetResponse());
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //    }
-        //}
-
+                throw;
+            }
+        }
+        static public string OrderPlace(string Name,string OrderNo,string Amount)
+        {
+            string Message = ConfigurationSettings.AppSettings["OrderPlaced"].ToString();
+            Message = Message.Replace("[Name]", Name);
+            Message = Message.Replace("[OrderNo]",OrderNo);
+            Message = Message.Replace("[Amount]", Amount);
+            return Message;
+        }
         public static string SendSMSNew(string mobile, string msg)
         {
             string strUrl = "http://smsw.co.in/API/WebSMS/Http/v1.0a/index.php?username=dwpe&password=dw@2020pe&sender=DWPEFU&to=" + mobile + "&message=" + msg + "& reqid = 1 & format ={ json}&route_id = 39 & callback =#&unique=0&sendondate='" + DateTime.Now.ToString() + " '";
