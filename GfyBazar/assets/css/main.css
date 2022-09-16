@@ -1396,7 +1396,9 @@ font-family: 'Poppins', sans-serif;
 
 .special-menu {float:right}
 .special-menu a {color:#ffdd35!important; border:none!important; padding-right:0px!important} 
-.special-menu a:hover{ background:none!important; color:#fff!important}
+.special-menu a:hover{ background:#000!important; color:#fff!important}
+.special-menu a:focus{ background:#000!important; color:#fff!important}
+
 
 .header-style-1 .header-nav .navbar-default .navbar-collapse .navbar-nav > li > a {
   background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
