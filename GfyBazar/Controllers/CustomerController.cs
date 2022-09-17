@@ -1707,10 +1707,14 @@ namespace GfyBazar.Controllers
                             {
                                 try
                                 {
-                                    string message = "Order Placed : Your order with order ID : " + dsCustomerOrder.Tables[0].Rows[0]["OrderNo"].ToString() + " of amount Rs. " + dsCustomerOrder.Tables[0].Rows[0]["OrderAmount"].ToString() + " has been placed.";
+                                    string OrderNo = dsCustomerOrder.Tables[0].Rows[0]["OrderNo"].ToString();
+                                    string Amount = dsCustomerOrder.Tables[0].Rows[0]["OrderAmount"].ToString();
+                                    string Name = model.CustomerID;
                                     string mobile = dsCustomerOrder.Tables[0].Rows[0]["CustomerMobile"].ToString();
-
-                                    BLSMS.SendSMSNew(mobile, message);
+                                    //string message = "Order Placed : Your order with order ID : " + dsCustomerOrder.Tables[0].Rows[0]["OrderNo"].ToString() + " of amount Rs. " + dsCustomerOrder.Tables[0].Rows[0]["OrderAmount"].ToString() + " has been placed.";
+                                    string sms = BLSMS.OrderPlace(Name, OrderNo, Amount);
+                                    string tempid = "1707166218557806280";
+                                    BLSMS.SendSms(mobile, sms,tempid);
                                 }
                                 catch
                                 { }
