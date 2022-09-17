@@ -1386,6 +1386,7 @@ font-family: 'Poppins', sans-serif;
   margin: 0;
   min-height:auto;
 }
+
 .header-style-1 .header-nav .navbar-default .navbar-collapse {
   padding: 0;
 }
@@ -6187,6 +6188,7 @@ z-index:10000
         border:none;
         box-shadow:none;
         height:24px;
+        padding:5px 23px;
     }
     .special-menu
     {
