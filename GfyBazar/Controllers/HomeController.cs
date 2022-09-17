@@ -335,6 +335,7 @@ namespace GfyBazar.Controllers
                 Session["Fk_AssociateId"] = loginCookie.Values["Fk_AssociateId"];
                 Session["TemPermanent"] = loginCookie.Values["TemPermanent"];
                 Session["EmailId"] = loginCookie.Values["EmailId"];
+                Session["WalletHomeBalance"] = loginCookie.Values["WalletHomeBalance"];
             }
             #endregion GetDataFromCookies
             List<Customer> lstfeatureproduct = new List<Customer>();

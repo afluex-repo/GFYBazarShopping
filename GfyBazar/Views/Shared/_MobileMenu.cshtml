@@ -52,10 +52,10 @@
                 i++;
             }
         }
-@if (Session["CustomerID"] != null)
+@if (Session["CustomerID"] != null && @Session["WalletHomeBalance"] !=null)
 {
         <li class="dropdown navbar-right special-menu">
-            <a href="#" data-toggle="modal" data-target="#Moneymodal"><img src="~/assets/images/icon/purse.png" style="height:30px;"/> Wallet: <blink><i class="fa fa-inr"></i> @Session["WalletHomeBalance"]</blink></a>
+            <a href="#" data-toggle="modal" data-target="#Moneymodal"><img src="~/assets/images/icon/purse.png" style="height:30px;"/> Wallet: <i class="fa fa-inr"></i> <blink>@Session["WalletHomeBalance"]</blink></a>
         </li>
 }
     </ul>
