@@ -272,7 +272,7 @@ namespace GfyBazar.Controllers
         public ActionResult GetCustomerList(Customer model)
         {
             List<Customer> lst = new List<Customer>();
-            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? Common.ConvertToSystemDate(DateTime.Now.ToString("dd/MM/yyyy"),"dd/MM/yyyy") : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? Common.ConvertToSystemDate(DateTime.Now.ToString("dd/MM/yyyy"), "dd/MM/yyyy") : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
             model.ToDate = string.IsNullOrEmpty(model.ToDate) ? Common.ConvertToSystemDate(DateTime.Now.ToString("dd/MM/yyyy"), "dd/MM/yyyy") : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             DataSet dsblock = model.GetCustomerList();
             if (dsblock != null && dsblock.Tables[0].Rows.Count > 0)
