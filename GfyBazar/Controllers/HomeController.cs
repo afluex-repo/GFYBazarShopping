@@ -960,6 +960,19 @@ namespace GfyBazar.Controllers
         {
             return View();
         }
+
+
+        public ActionResult RefundAndCancellationsPolicy()
+        {
+            return View();
+        }
+
+        public ActionResult ShippingPolicy()
+        {
+            return View();
+        }
+
+
     }
 }
 
