@@ -1209,7 +1209,7 @@
     <Content Include="Views\Home\Maintenance.cshtml" />
     <Content Include="Views\Home\TermsAndCondition.cshtml" />
     <Content Include="Views\Home\privacy.cshtml" />
-    <Content Include="Views\Home\RefundAndCancellationsPolicy.cshtml" />
+    <Content Include="Views\Home\RefundAndCancellationPolicy.cshtml" />
     <Content Include="Views\Home\ShippingPolicy.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
