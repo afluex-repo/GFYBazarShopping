@@ -320,3 +320,4 @@ F:\SachinMishraProject\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.d
 F:\SachinMishraProject\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.pdb
 F:\SachinMishraProject\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.csprojResolveAssemblyReference.cache
 E:\Repository-Projects\repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.csprojResolveAssemblyReference.cache
+E:\Repository\GFYBazarShopping\GfyBazar\obj\Debug\GfyBazar.csprojResolveAssemblyReference.cache
